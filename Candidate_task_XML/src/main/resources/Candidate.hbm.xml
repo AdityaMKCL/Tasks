@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.app.entity">
+	<class name="Candidate" table="candidate">
+		<id name="id" column="cid">
+			<generator class="identity" />
+		</id>
+		<property name="candidate_name" column="candidate_name" />
+		<property name="user_name" column="user_name" />
+		<property name="password" column="password" />
+		<property name="description" column="description" />
+		<property name="gender" column="gender">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.app.entity.Gender</param>
+			</type>
+		</property>
+		<property name="standard" column="standard" />
+
+		<set name="languages" table="programminglang" cascade="all">
+			<key column="cid" not-null="true" />
+			<one-to-many class="ProgrammingLang" />
+		</set>
+
+		<one-to-one name="file" class="File" cascade="all" />
+
+		<set name="skills" table="skills" cascade="all">
+			<key column="cid" not-null="true" />
+			<one-to-many class="Skills" />
+		</set>
+	</class>
+</hibernate-mapping>

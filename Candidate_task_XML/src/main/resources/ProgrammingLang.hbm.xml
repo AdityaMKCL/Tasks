@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping package="com.app.entity">
+    <class name="ProgrammingLang" table="programminglang">
+        <id name="pid" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name" />
+ 
+        <many-to-one name="candi" class="Candidate" column="cid" not-null="true" insert="false" update="false"/>
+
+    </class> 
+</hibernate-mapping>
