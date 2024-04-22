@@ -43,11 +43,13 @@
 			</div>
 
 			<!-- alert ended  -->
+			<form action="/MKCL_Assignment_1/exameventpaper/finalPaper">
+			
 			<div class="row">
 				<div class="col-md-3 col-12">Select Paper *</div>
 				<div class="col-md-9 col-12">
 					<!-- <div> -->
-					<select class="form-select" name="defaultLanguageID" id="city">
+					<select class="form-select" name="Paper" id="city">
 						<optgroup id="addoptions">
 							
 						</optgroup>
@@ -80,7 +82,7 @@
 					No.of Attempts <i class="fa fa-question-circle"></i>
 				</div>
 				<div class="col-md-7 col-12">
-					<input type="text" class="w-50 form-control">
+					<input type="text" class="w-50 form-control" name="NoOfAttempts">
 				</div>
 			</div>
 			<div class="row my-2 text-success">
@@ -89,13 +91,13 @@
 						class="fa fa-question-circle"></i>
 				</div>
 				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline NoOfAttempts">
-						<input class="form-check-input" type="radio" name="NoofAttempts"
+					<div class="form-check form-check-inline IdenticalOptions">
+						<input class="form-check-input" type="radio" name="IdenticalOptions"
 							id="inlineRadio1" value="Yes"> <label
 							class="form-check-label " for="inlineRadio1">Yes</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="NoofAttempts"
+						<input class="form-check-input" type="radio" name="IdenticalOptions"
 							id="inlineRadio2" value="No"> <label
 							class="form-check-label " for="inlineRadio1">No</label>
 					</div>
@@ -109,13 +111,13 @@
 				<div class="col-md-7 col-12">
 					<div class="form-check form-check-inline ">
 						<input class="form-check-input" type="radio"
-							name="identicalOptions" id="inlineRadio1" value="Yes"> <label
+							name="identicalItems" id="inlineRadio1" value="Yes"> <label
 							class="form-check-label " for="inlineRadio1">Yes (No
 							randomization)</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio"
-							name="identicalOptions" id="inlineRadio2" value="No"> <label
+							name="identicalItems" id="inlineRadio2" value="No"> <label
 							class="form-check-label " for="inlineRadio1">No
 							(randomization)</label>
 					</div>
@@ -228,7 +230,7 @@
 				</div>
 			</div>
 
-
+			</form>
 		</div>
 	</div>
 	<script

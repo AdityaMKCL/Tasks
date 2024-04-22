@@ -21,6 +21,25 @@ public class ExamEventPaperDetails {
 	private boolean isAnswerChange;
 	private boolean showNotepad;
 	private boolean palletNavigation;
+	
+	
+	public ExamEventPaperDetails() {}
+	public ExamEventPaperDetails(long examEventID, Long fkPaperID, int noOfAttempts, Boolean isRandomOption,
+			String allowAttemptType, boolean isIdenticalItems, boolean isIdenticalItemSequence, boolean isSkipQuestion,
+			boolean isAnswerChange, boolean showNotepad, boolean palletNavigation) {
+		super();
+		this.examEventID = examEventID;
+		this.fkPaperID = fkPaperID;
+		this.noOfAttempts = noOfAttempts;
+		this.isRandomOption = isRandomOption;
+		this.allowAttemptType = allowAttemptType;
+		this.isIdenticalItems = isIdenticalItems;
+		this.isIdenticalItemSequence = isIdenticalItemSequence;
+		this.isSkipQuestion = isSkipQuestion;
+		this.isAnswerChange = isAnswerChange;
+		this.showNotepad = showNotepad;
+		this.palletNavigation = palletNavigation;
+	}
 	public long getExamEventPaperID() {
 		return examEventPaperID;
 	}
