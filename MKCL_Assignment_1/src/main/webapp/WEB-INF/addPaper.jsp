@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.Session"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -137,7 +138,7 @@
 				<div class="col">
 					<input type="button" value="Back" class="btn btn-secondary rounded-pill px-4"> 
 					<input type="button" value="Save" class="btn btn-success rounded-pill px-4" onclick="savepapers()">
-					<input type="button" value="Proceed" class="btn btn-success rounded-pill">
+					<a href="http://localhost:8081/MKCL_Assignment_1/paperconfig/" class="btn btn-success rounded-pill">Proceed</a>
 				</div>
 			</div>
 		</div>
@@ -153,6 +154,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
+		 	 const map1 = new Map();
          $(document).ready(function () {
                 $.ajax({
                     method: 'GET',
@@ -170,6 +172,7 @@
                         var html=``;
                         for (let i = 2; i < arr.length; i+=3) {
                            arr[i-1]=arr[i-1].trim();
+                           map1.set(arr[i-1], arr[i-2]);
                              html+=`<tr id="`+arr[i-1]+`">`;
                                 html+=`<td>`+arr[i] + `</td>`;
                                 html+=`<td>`+arr[i-1] + `</td>`;
@@ -188,7 +191,6 @@
             })
             
 			 var cart= new Set();
-		 	 var cart2=new Set();
             function loaddoc(param){
              cart.add(param.name);
              param.name=param.name.trim();
@@ -239,10 +241,11 @@
 			console.log(cart);
 			var mySet =new Array();
 			cart.forEach((ele)=>{
-			    mySet.push(ele);
+			    mySet.push(map1.get(ele));
 			});
 			console.log(mySet);
-			var data={papers: mySet.toString()};
+			var data={papers: mySet.toString(),
+					 };
 			 $.ajax({
                  method: 'GET',
                  url: 'http://localhost:8081/MKCL_Assignment_1/exameventpaper/savepapers',

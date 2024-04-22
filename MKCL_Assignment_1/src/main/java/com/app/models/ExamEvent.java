@@ -139,12 +139,20 @@ public class ExamEvent implements Serializable{
 	public void setExamEventState(boolean examEventState) {
 		this.examEventState = examEventState;
 	}
-
-	
 //	private transient List<ExamEventPaperDetails> listExamEventPaperDetails;
 //	
 //	private List<ExamEventScheduleTypeAssociation> examEventScheduleTypeAssociationList;
 	// added by reena for Mastering Jee 2014-15 on 28May2014
+
+	@Override
+	public String toString() {
+		return "ExamEvent [examEventID=" + examEventID + ", clientID=" + clientID + ", examEventCode=" + examEventCode
+				+ ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", isActiveEvent="
+				+ isActiveEvent + ", defaultLanguageID=" + defaultLanguageID + ", createdBy=" + createdBy
+				+ ", dateCreated=" + dateCreated + ", modifiedBy=" + modifiedBy + ", dateModified=" + dateModified
+				+ ", deleted=" + deleted + ", eventCategory=" + eventCategory + ", eventType=" + eventType
+				+ ", examEventState=" + examEventState + "]";
+	}
 	
 	
 

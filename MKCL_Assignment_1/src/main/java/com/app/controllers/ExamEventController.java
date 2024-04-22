@@ -48,7 +48,7 @@ public class ExamEventController {
 			   HttpSession session = request.getSession();
 			   ExamEvent e=service.findExamEvent(examEvent);
 			   session.setAttribute("examEvent", e);
-			   
+			   System.out.println(e);
 			} catch (java.text.ParseException e) {
 				request.setAttribute("msg", "Some error occured ");
 			    e.printStackTrace(); 

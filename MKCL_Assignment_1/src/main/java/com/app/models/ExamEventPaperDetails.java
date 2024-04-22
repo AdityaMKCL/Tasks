@@ -87,37 +87,37 @@ public class ExamEventPaperDetails {
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
 	}
-	public boolean isIdenticalItems() {
+	public boolean getIsIdenticalItems() {
 		return isIdenticalItems;
 	}
-	public void setIdenticalItems(boolean isIdenticalItems) {
+	public void setIsIdenticalItems(boolean isIdenticalItems) {
 		this.isIdenticalItems = isIdenticalItems;
 	}
-	public boolean isIdenticalItemSequence() {
+	public boolean getIsIdenticalItemSequence() {
 		return isIdenticalItemSequence;
 	}
-	public void setIdenticalItemSequence(boolean isIdenticalItemSequence) {
+	public void setIsIdenticalItemSequence(boolean isIdenticalItemSequence) {
 		this.isIdenticalItemSequence = isIdenticalItemSequence;
 	}
-	public boolean isSkipQuestion() {
+	public boolean getIsSkipQuestion() {
 		return isSkipQuestion;
 	}
-	public void setSkipQuestion(boolean isSkipQuestion) {
+	public void setIsSkipQuestion(boolean isSkipQuestion) {
 		this.isSkipQuestion = isSkipQuestion;
 	}
-	public boolean isAnswerChange() {
+	public boolean getIsAnswerChange() {
 		return isAnswerChange;
 	}
-	public void setAnswerChange(boolean isAnswerChange) {
+	public void setIsAnswerChange(boolean isAnswerChange) {
 		this.isAnswerChange = isAnswerChange;
 	}
-	public boolean isShowNotepad() {
+	public boolean getShowNotepad() {
 		return showNotepad;
 	}
 	public void setShowNotepad(boolean showNotepad) {
 		this.showNotepad = showNotepad;
 	}
-	public boolean isPalletNavigation() {
+	public boolean getPalletNavigation() {
 		return palletNavigation;
 	}
 	public void setPalletNavigation(boolean palletNavigation) {

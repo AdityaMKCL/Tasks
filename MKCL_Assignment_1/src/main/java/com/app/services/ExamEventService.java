@@ -23,7 +23,7 @@ public class ExamEventService {
 	public ExamEvent findExamEvent(ExamEvent event) {
 		ExamEvent eve=new ExamEvent();
 		try {
-			eve=icurd.findOne(ExamEvent.class, "examEventCode", event.getExamEventCode());
+			eve=icurd.findOne(ExamEvent.class, "name", event.getName());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
