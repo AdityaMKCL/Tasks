@@ -142,6 +142,16 @@ public class ExamEventPaperDetails {
 	public void setPalletNavigation(boolean palletNavigation) {
 		this.palletNavigation = palletNavigation;
 	}
+	@Override
+	public String toString() {
+		return "ExamEventPaperDetails [examEventPaperID=" + examEventPaperID + ", examEventID=" + examEventID
+				+ ", fkPaperID=" + fkPaperID + ", noOfAttempts=" + noOfAttempts + ", isRandomOption=" + isRandomOption
+				+ ", allowAttemptType=" + allowAttemptType + ", createdBy=" + createdBy + ", dateCreated=" + dateCreated
+				+ ", modifiedBy=" + modifiedBy + ", dateModified=" + dateModified + ", deleted=" + deleted
+				+ ", isIdenticalItems=" + isIdenticalItems + ", isIdenticalItemSequence=" + isIdenticalItemSequence
+				+ ", isSkipQuestion=" + isSkipQuestion + ", isAnswerChange=" + isAnswerChange + ", showNotepad="
+				+ showNotepad + ", palletNavigation=" + palletNavigation + "]";
+	}
 	
 	
 }

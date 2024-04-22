@@ -47,6 +47,12 @@ public class ExamEventPaperDetailsController {
 
 	}
 
+	public boolean getit(String check) {
+		check=check.trim();
+		if(check.equals("Yes"))return true;
+		return false;
+	}
+	
 	@ResponseBody
 	@GetMapping("/finalPaper")
 	public String savepaper(@RequestParam("Paper") String paper, @RequestParam("examType") String examType,
@@ -55,7 +61,8 @@ public class ExamEventPaperDetailsController {
 			@RequestParam("identicalItems") String identicalItems,
 			@RequestParam("optionRandomization") String optionRandomization,
 			@RequestParam("doublePalletNavigation") String doublePalletNavigation,
-			@RequestParam("skipQuestion") String skipQuestion, @RequestParam("answerChange") String answerChange,
+			@RequestParam("skipQuestion") String skipQuestion ,
+			@RequestParam("answerChange") String answerChange,
 			@RequestParam("showNotepad") String showNotepad, HttpServletRequest request
 
 	) {
@@ -63,8 +70,15 @@ public class ExamEventPaperDetailsController {
 		HttpSession session = request.getSession();
 		ExamEvent e = (ExamEvent) session.getAttribute("examEvent");
 		Long eventid=e.getExamEventID();
-		 ExamEventPaperDetails edetail=new ExamEventPaperDetails();
+//		System.out.println(identicaloptions);
+//		System.out.println(identicalItems);
+		 ExamEventPaperDetails edetail=new ExamEventPaperDetails(eventid, Long.parseLong(paper),noOfAttempts,getit(optionRandomization),
+				 examType, getit(identicaloptions),getit(identicalItems), getit(skipQuestion),
+					getit(answerChange),getit(showNotepad), getit(doublePalletNavigation));
+		ExamEventPaperService service = new ExamEventPaperService();
+		//System.out.println(edetail.toString());
+		service.savePaperDetails(edetail);
 		System.out.println("in the save papers controller ");
-		return null;
+		return "success";
 	}
 }

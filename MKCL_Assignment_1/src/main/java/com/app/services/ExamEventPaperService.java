@@ -3,7 +3,9 @@ package com.app.services;
 import java.util.ArrayList;
 
 import com.app.dao.ExamEventPaperDao;
+import com.app.dao.ExamEventPaperDetailsDao;
 import com.app.models.ExamEvent;
+import com.app.models.ExamEventPaperDetails;
 
 public class ExamEventPaperService {
 
@@ -24,6 +26,17 @@ public class ExamEventPaperService {
 		ArrayList<Long> arr= new ArrayList<Long>();
 		arr=edao.getEventPapers(id);
 		return arr.toString();
+	}
+
+	public void savePaperDetails(ExamEventPaperDetails edetail) {
+		getEventPaperByEventAndPaperId(edetail);
+	}
+
+	private ExamEventPaperDetails getEventPaperByEventAndPaperId(ExamEventPaperDetails edetail) {
+		ExamEventPaperDetails e= new ExamEventPaperDetails();
+		ExamEventPaperDetailsDao edao=new ExamEventPaperDetailsDao();
+		e=edao.getExamEventDetail(edetail);
+		return e;
 	}
 
 }

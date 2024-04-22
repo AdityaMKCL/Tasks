@@ -71,8 +71,8 @@
 				<div class="col-md-7 col-12">
 					<select class="form-select" name="examType" id="city">
 						<optgroup id="">
-							<option value="PRACTICE">PRACTICE</option>
-							<option value="MAIN">MAIN</option>
+							<option value="1">PRACTICE</option>
+							<option value="2">MAIN</option>
 						</optgroup>
 					</select>
 				</div>
