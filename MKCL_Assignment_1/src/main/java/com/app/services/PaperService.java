@@ -22,5 +22,11 @@ public class PaperService {
 		}
 		return ans.toString();
 	}
+	public ArrayList<Paper> getAllPapersList(Long ExameventId){
+		ArrayList<Paper> arr=new ArrayList<Paper>();
+		
+		arr=dao.getAllPapersList(ExameventId);
+		return arr;
+	}
 	
 }

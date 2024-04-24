@@ -27,6 +27,7 @@ public class Paper {
 	/**
 	 * @return the total_Marks_Check
 	 */
+	public Paper() {}
 	public String getTotal_Marks_Check() {
 		return Total_Marks_Check;
 	}

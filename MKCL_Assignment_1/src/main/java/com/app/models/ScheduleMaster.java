@@ -1,5 +1,5 @@
 package com.app.models;
-import java.sql.Date;
+import java.util.Date;
 
 
 public class ScheduleMaster {
@@ -18,6 +18,28 @@ public class ScheduleMaster {
 	private String scheduleType;
 	private Boolean allowScheduleExtension;	
 	private int maxNumberOfPapers;
+	
+	public ScheduleMaster() {}
+	
+	public ScheduleMaster(Date scheduleStart, Date scheduleEnd, long fkExamEventID, String scheduleType,
+			int maxNumberOfPapers) {
+		super();
+		this.scheduleStart = scheduleStart;
+		this.scheduleEnd = scheduleEnd;
+		this.fkExamEventID = fkExamEventID;
+		this.scheduleType = scheduleType;
+		this.maxNumberOfPapers = maxNumberOfPapers;
+	}
+	public ScheduleMaster(long scheduleId,Date scheduleStart, Date scheduleEnd, long fkExamEventID, String scheduleType,
+			int maxNumberOfPapers) {
+		super();
+		this.scheduleID=scheduleId;
+		this.scheduleStart = scheduleStart;
+		this.scheduleEnd = scheduleEnd;
+		this.fkExamEventID = fkExamEventID;
+		this.scheduleType = scheduleType;
+		this.maxNumberOfPapers = maxNumberOfPapers;
+	}
 	public long getScheduleID() {
 		return scheduleID;
 	}

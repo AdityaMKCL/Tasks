@@ -44,191 +44,192 @@
 
 			<!-- alert ended  -->
 			<form action="/MKCL_Assignment_1/exameventpaper/finalPaper">
-			
-			<div class="row">
-				<div class="col-md-3 col-12">Select Paper *</div>
-				<div class="col-md-9 col-12">
-					<!-- <div> -->
-					<select class="form-select" name="Paper" id="city">
-						<optgroup id="addoptions">
-							
-						</optgroup>
-					</select>
-					<!-- </div> -->
-					<figcaption class="blockquote-footer m-1 p-0">papers
-						which has no access to you are in disable state</figcaption>
-				</div>
-			</div>
-			<div class="row my-2">
-				<div class="col-12 lead fs-3 p-1 px-2 rounded"
-					style="background-color: rgb(160, 160, 160);">General Setting
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-5 col-12">
-					Exam Type <i class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<select class="form-select" name="examType" id="city">
-						<optgroup id="">
-							<option value="1">PRACTICE</option>
-							<option value="2">MAIN</option>
-						</optgroup>
-					</select>
-				</div>
-			</div>
-			<div class="row my-2">
-				<div class="col-md-5 col-12">
-					No.of Attempts <i class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<input type="text" class="w-50 form-control" name="NoOfAttempts">
-				</div>
-			</div>
-			<div class="row my-2 text-success">
-				<div class="col-md-5 col-12">
-					Identical Question Papers to all candidate <i
-						class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline IdenticalOptions">
-						<input class="form-check-input" type="radio" name="IdenticalOptions"
-							id="inlineRadio1" value="Yes"> <label
-							class="form-check-label " for="inlineRadio1">Yes</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="IdenticalOptions"
-							id="inlineRadio2" value="No"> <label
-							class="form-check-label " for="inlineRadio1">No</label>
+
+				<div class="row">
+					<div class="col-md-3 col-12">Select Paper *</div>
+					<div class="col-md-9 col-12">
+						<!-- <div> -->
+						<select class="form-select" name="Paper" id="city">
+							<optgroup id="addoptions">
+
+							</optgroup>
+						</select>
+						<!-- </div> -->
+						<figcaption class="blockquote-footer m-1 p-0">papers
+							which has no access to you are in disable state</figcaption>
 					</div>
 				</div>
-			</div>
-			<div class="row my-2 text-success">
-				<div class="col-md-5 col-12">
-					Identical items sequence to all candidate <i
-						class="fa fa-question-circle"></i>
+				<div class="row my-2">
+					<div class="col-12 lead fs-3 p-1 px-2 rounded"
+						style="background-color: rgb(160, 160, 160);">General
+						Setting</div>
 				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline ">
-						<input class="form-check-input" type="radio"
-							name="identicalItems" id="inlineRadio1" value="Yes"> <label
-							class="form-check-label " for="inlineRadio1">Yes (No
-							randomization)</label>
+				<div class="row">
+					<div class="col-md-5 col-12">
+						Exam Type <i class="fa fa-question-circle"></i>
 					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio"
-							name="identicalItems" id="inlineRadio2" value="No"> <label
-							class="form-check-label " for="inlineRadio1">No
-							(randomization)</label>
+					<div class="col-md-7 col-12">
+						<select class="form-select" name="examType" id="city">
+							<optgroup id="">
+								<option value="1">PRACTICE</option>
+								<option value="2">MAIN</option>
+							</optgroup>
+						</select>
 					</div>
 				</div>
-			</div>
-			<div class="row my-2">
-				<div class="col-12 lead fs-3 p-1 px-2 rounded"
-					style="background-color: rgb(160, 160, 160);">Exam Screen
-					Setting</div>
-			</div>
-			<div class="row my-2">
-				<div class="col-md-5 col-12">
-					Option Randomization <i class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline ">
-						<input class="form-check-input" type="radio"
-							name="optionRandomization" id="inlineRadio1" value="Yes">
-						<label class="form-check-label " for="inlineRadio1">Yes</label>
+				<div class="row my-2">
+					<div class="col-md-5 col-12">
+						No.of Attempts <i class="fa fa-question-circle"></i>
 					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio"
-							name="optionRandomization" id="inlineRadio2" value="No">
-						<label class="form-check-label " for="inlineRadio1">No</label>
+					<div class="col-md-7 col-12">
+						<input type="text" class="w-50 form-control" name="NoOfAttempts">
 					</div>
 				</div>
-			</div>
-			<div class="row my-2">
-				<div class="col-12 lead fs-3 p-1 px-2 rounded"
-					style="background-color: rgb(160, 160, 160);">Exam Interface
-					Control Settings</div>
-			</div>
-			<div class="row my-2 text-success">
-				<div class="col-md-5 col-12">
-					Double pallet naviation <i class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline ">
-						<input class="form-check-input" type="radio"
-							name="doublePalletNavigation" id="inlineRadio1" value="Yes">
-						<label class="form-check-label " for="inlineRadio1">Yes</label>
+				<div class="row my-2 text-success">
+					<div class="col-md-5 col-12">
+						Identical Question Papers to all candidate <i
+							class="fa fa-question-circle"></i>
 					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio"
-							name="doublePalletNavigation" id="inlineRadio2" value="No">
-						<label class="form-check-label " for="inlineRadio1">No</label>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline IdenticalOptions">
+							<input class="form-check-input" type="radio"
+								name="IdenticalOptions" id="inlineRadio1" value="Yes"> <label
+								class="form-check-label " for="inlineRadio1">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								name="IdenticalOptions" id="inlineRadio2" value="No"> <label
+								class="form-check-label " for="inlineRadio1">No</label>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row my-2 text-success">
-				<div class="col-md-5 col-12">
-					Skip Question <i class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline ">
-						<input class="form-check-input" type="radio" name="skipQuestion"
-							id="inlineRadio1" value="Yes"> <label
-							class="form-check-label " for="inlineRadio1">Yes</label>
+				<div class="row my-2 text-success">
+					<div class="col-md-5 col-12">
+						Identical items sequence to all candidate <i
+							class="fa fa-question-circle"></i>
 					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="skipQuestion"
-							id="inlineRadio2" value="No"> <label
-							class="form-check-label " for="inlineRadio1">No</label>
-					</div>
-				</div>
-			</div>
-			<div class="row my-2 text-success">
-				<div class="col-md-5 col-12">
-					Answer question can be chnged After Attempt <i
-						class="fa fa-question-circle"></i>
-				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline ">
-						<input class="form-check-input" type="radio" name="answerChange"
-							id="inlineRadio1" value="Yes"> <label
-							class="form-check-label " for="inlineRadio1">Yes</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="answerChange"
-							id="inlineRadio2" value="No"> <label
-							class="form-check-label " for="inlineRadio1">No</label>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline ">
+							<input class="form-check-input" type="radio"
+								name="identicalItems" id="inlineRadio1" value="Yes"> <label
+								class="form-check-label " for="inlineRadio1">Yes (No
+								randomization)</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								name="identicalItems" id="inlineRadio2" value="No"> <label
+								class="form-check-label " for="inlineRadio1">No
+								(randomization)</label>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row my-2 text-success">
-				<div class="col-md-5 col-12">
-					Show Notepad <i class="fa fa-question-circle"></i>
+				<div class="row my-2">
+					<div class="col-12 lead fs-3 p-1 px-2 rounded"
+						style="background-color: rgb(160, 160, 160);">Exam Screen
+						Setting</div>
 				</div>
-				<div class="col-md-7 col-12">
-					<div class="form-check form-check-inline ">
-						<input class="form-check-input" type="radio" name="showNotepad"
-							id="inlineRadio1" value="Yes"> <label
-							class="form-check-label " for="inlineRadio1">Yes</label>
+				<div class="row my-2">
+					<div class="col-md-5 col-12">
+						Option Randomization <i class="fa fa-question-circle"></i>
 					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="showNotepad"
-							id="inlineRadio2" value="No"> <label
-							class="form-check-label " for="inlineRadio1">No</label>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline ">
+							<input class="form-check-input" type="radio"
+								name="optionRandomization" id="inlineRadio1" value="Yes">
+							<label class="form-check-label " for="inlineRadio1">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								name="optionRandomization" id="inlineRadio2" value="No">
+							<label class="form-check-label " for="inlineRadio1">No</label>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row text-center my-2">
-				<div class="col">
-					<input type="button" value="Back"
-						class="btn btn-secondary rounded-pill px-4">
-						 <input type="submit" value="Save"
-						class="btn btn-success rounded-pill px-4"> 
-						<input type="button" value="Proceed"
-						 class="btn btn-success rounded-pill">
+				<div class="row my-2">
+					<div class="col-12 lead fs-3 p-1 px-2 rounded"
+						style="background-color: rgb(160, 160, 160);">Exam Interface
+						Control Settings</div>
 				</div>
-			</div>
+				<div class="row my-2 text-success">
+					<div class="col-md-5 col-12">
+						Double pallet naviation <i class="fa fa-question-circle"></i>
+					</div>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline ">
+							<input class="form-check-input" type="radio"
+								name="doublePalletNavigation" id="inlineRadio1" value="Yes">
+							<label class="form-check-label " for="inlineRadio1">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"
+								name="doublePalletNavigation" id="inlineRadio2" value="No">
+							<label class="form-check-label " for="inlineRadio1">No</label>
+						</div>
+					</div>
+				</div>
+				<div class="row my-2 text-success">
+					<div class="col-md-5 col-12">
+						Skip Question <i class="fa fa-question-circle"></i>
+					</div>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline ">
+							<input class="form-check-input" type="radio" name="skipQuestion"
+								id="inlineRadio1" value="Yes"> <label
+								class="form-check-label " for="inlineRadio1">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="skipQuestion"
+								id="inlineRadio2" value="No"> <label
+								class="form-check-label " for="inlineRadio1">No</label>
+						</div>
+					</div>
+				</div>
+				<div class="row my-2 text-success">
+					<div class="col-md-5 col-12">
+						Answer question can be chnged After Attempt <i
+							class="fa fa-question-circle"></i>
+					</div>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline ">
+							<input class="form-check-input" type="radio" name="answerChange"
+								id="inlineRadio1" value="Yes"> <label
+								class="form-check-label " for="inlineRadio1">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="answerChange"
+								id="inlineRadio2" value="No"> <label
+								class="form-check-label " for="inlineRadio1">No</label>
+						</div>
+					</div>
+				</div>
+				<div class="row my-2 text-success">
+					<div class="col-md-5 col-12">
+						Show Notepad <i class="fa fa-question-circle"></i>
+					</div>
+					<div class="col-md-7 col-12">
+						<div class="form-check form-check-inline ">
+							<input class="form-check-input" type="radio" name="showNotepad"
+								id="inlineRadio1" value="Yes"> <label
+								class="form-check-label " for="inlineRadio1">Yes</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="showNotepad"
+								id="inlineRadio2" value="No"> <label
+								class="form-check-label " for="inlineRadio1">No</label>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center my-2">
+					<div class="col">
+						<input type="button" value="Back"
+							class="btn btn-secondary rounded-pill px-4"> <input
+							type="submit" value="Save"
+							class="btn btn-success rounded-pill px-4"> <a
+							href="http://localhost:8081/MKCL_Assignment_1/schedule/redirect"
+							class="btn btn-success rounded-pill">Proceed</a>
+
+					</div>
+				</div>
 
 			</form>
 		</div>
