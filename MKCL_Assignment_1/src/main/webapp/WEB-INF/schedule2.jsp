@@ -42,7 +42,7 @@
         <div class="row mt-5">
             <a class="btn btn-secondary text-start rounded-0 border-0 fw-bold border-0 fw-bold" data-bs-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample" style="background-color: rgb(220, 220, 220)!important;color: black;">
-                Exam Event Details 
+                Exam Event Details  <i class="fa fa-angle-double-down" style="font-size:30px"></i>
             </a>
             <div class="collapse" id="collapseExample">
                 <div class="card card-body">
@@ -81,7 +81,7 @@
         <div class="row ">
             <a class="btn btn-secondary text-start rounded-0 border-0 fw-bold" data-bs-toggle="collapse" href="#collapseExample2" role="button"
                 aria-expanded="false" aria-controls="collapseExample" style="background-color: rgb(220, 220, 220)!important;color: black;">
-                Papers Details
+                Papers Details <i class="fa fa-angle-double-down" style="font-size:30px"></i>
             </a>
             <div class="collapse" id="collapseExample2">
                 <div class="card card-body text-center">
@@ -127,7 +127,7 @@
         <div class="row ">
             <a class="btn btn-secondary text-start rounded-0 border-0 fw-bold" data-bs-toggle="collapse" href="#collapseExample3" role="button"
                 aria-expanded="false" aria-controls="collapseExample" style="background-color: rgb(220, 220, 220)!important;color: black;">
-                Schedule
+                Schedule <i class="fa fa-angle-double-down" style="font-size:30px"></i>
             </a>
             <div class="collapse" id="collapseExample3">
                 <div class="card card-body text-center">
@@ -173,7 +173,7 @@
         <div class="row text-center mt-4">
             <div class="col">
                 <input type="button" value="Back" class="btn btn-secondary rounded-pill px-5">
-                <input type="button" value="Activate Exam Event" class="btn btn-success rounded-pill px-3">
+                <a type="button" href="http://localhost:8081/MKCL_Assignment_1/examevent/config" class="btn btn-success rounded-pill px-3" >Activate Exam Event</a>
                 <input type="button" value="Proceed" class="btn btn-success rounded-pill px-5" disabled>
             </div>
         </div>
@@ -181,6 +181,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+            <script src="https://use.fontawesome.com/releases/vVERSION/js/all.js" data-mutate-approach="sync"></script>
+        
 </body>
 
 </html>

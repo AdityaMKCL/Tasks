@@ -136,7 +136,7 @@
 			</div>
 			<div class="row text-center">
 				<div class="col">
-					<input type="button" value="Back" class="btn btn-secondary rounded-pill px-4"> 
+					<a href="http://localhost:8081/MKCL_Assignment_1/"  class="btn btn-secondary rounded-pill px-4">Back</a>
 					<input type="button" value="Save" class="btn btn-success rounded-pill px-4" onclick="savepapers()">
 					<a href="http://localhost:8081/MKCL_Assignment_1/paperconfig/" class="btn btn-success rounded-pill">Proceed</a>
 				</div>

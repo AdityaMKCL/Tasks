@@ -24,10 +24,9 @@ public class ExamEvent implements Serializable{
 	private Date dateCreated;
 	private String modifiedBy;
 	private Date dateModified;
-	private char deleted;
 	private String eventCategory;
 	private String eventType;
-	private boolean  examEventState;
+	private Boolean  examEventState;
 
 	
 	public ExamEvent(String examEventCode, String name, Date startDate, Date endDate, String defaultLanguageID) {
@@ -115,12 +114,7 @@ public class ExamEvent implements Serializable{
 	public void setDateModified(Date dateModified) {
 		this.dateModified = dateModified;
 	}
-	public char getDeleted() {
-		return deleted;
-	}
-	public void setDeleted(char deleted) {
-		this.deleted = deleted;
-	}
+
 	public String getEventCategory() {
 		return eventCategory;
 	}
@@ -133,10 +127,10 @@ public class ExamEvent implements Serializable{
 	public void setEventType(String eventType) {
 		this.eventType = eventType;
 	}
-	public boolean isExamEventState() {
+	public Boolean getExamEventState() {
 		return examEventState;
 	}
-	public void setExamEventState(boolean examEventState) {
+	public void setExamEventState(Boolean examEventState) {
 		this.examEventState = examEventState;
 	}
 //	private transient List<ExamEventPaperDetails> listExamEventPaperDetails;
@@ -150,7 +144,7 @@ public class ExamEvent implements Serializable{
 				+ ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", isActiveEvent="
 				+ isActiveEvent + ", defaultLanguageID=" + defaultLanguageID + ", createdBy=" + createdBy
 				+ ", dateCreated=" + dateCreated + ", modifiedBy=" + modifiedBy + ", dateModified=" + dateModified
-				+ ", deleted=" + deleted + ", eventCategory=" + eventCategory + ", eventType=" + eventType
+				+  ", eventCategory=" + eventCategory + ", eventType=" + eventType
 				+ ", examEventState=" + examEventState + "]";
 	}
 	

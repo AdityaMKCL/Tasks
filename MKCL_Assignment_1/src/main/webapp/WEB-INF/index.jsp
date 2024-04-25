@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
     <html lang="en">
 
     <head>
@@ -70,10 +72,25 @@
                         <div class="col">
                             <input type="submit" value="Save" class="btn btn-success rounded-pill px-4">
 
-                            <a href="http://localhost:8081/MKCL_Assignment_1/papers" class="btn btn-success rounded-pill">Proceed</a>
+                            <a  class="btn btn-success rounded-pill" onclick="procees()">Proceed</a>
                         </div>
                     </div>
                 </form>
+                <jsp:useBean id= "eventservice" class= "com.app.services.ExamEventService" >  
+ 					<c:set var="events" value="${eventservice.allEvents}"></c:set>
+				</jsp:useBean> 
+               
+               
+                <select class="form-select my-3" name="Paper" id="addoptions2">
+							<optgroup  >
+                			<c:forEach var="event" items="${events}">
+                			
+                			<option value="${event.examEventID}" id="" >${event.name} </option>
+                			
+							</c:forEach>
+							</optgroup>
+							
+						</select>
              </div>
         </div>
         <script
@@ -85,6 +102,11 @@
 
         <script>
             $(document).ready(function () {
+					getList();
+            })
+            
+            function getList(){
+
                 $.ajax({
                     method: 'GET',
                     url: 'http://localhost:8081/MKCL_Assignment_1/langlist',
@@ -110,8 +132,30 @@
                         console.error('Error: ', jqXHR.responseText);
                     }
                 });
+                }
+            
+            function procees(){
 
-            })
+				var value =document.getElementById("addoptions2");
+				//console.log(value);
+				var selected=value.options[value.selectedIndex].value;
+
+				$.ajax({
+                    method: 'GET',
+                    url: 'http://localhost:8081/MKCL_Assignment_1/examevent/getone/'+selected,
+                    contentType: 'application/json',
+                    success: function (result) {
+                        console.log(result);
+                      	getList();
+                        window.location.replace("http://localhost:8081/MKCL_Assignment_1/papers/addpaper");
+                    },
+                    error: function ajaxError(jqXHR) {
+                        console.error('Error: ', jqXHR.responseText);
+                    }
+                });
+				
+                
+                }
         </script>
     </body>
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.app.models.ExamEvent;
 import com.app.models.ExamEventPaperDetails;
@@ -55,7 +56,7 @@ public class ExamEventPaperDetailsController {
 	
 	@ResponseBody
 	@GetMapping("/finalPaper")
-	public String savepaper(@RequestParam("Paper") String paper, @RequestParam("examType") String examType,
+	public RedirectView savepaper(@RequestParam("Paper") String paper, @RequestParam("examType") String examType,
 			@RequestParam("NoOfAttempts") Integer noOfAttempts,
 			@RequestParam("IdenticalOptions") String identicaloptions,
 			@RequestParam("identicalItems") String identicalItems,
@@ -79,6 +80,6 @@ public class ExamEventPaperDetailsController {
 		//System.out.println(edetail.toString());
 		service.savePaperDetails(edetail);
 		System.out.println("in the save papers controller ");
-		return "success";
+		return new RedirectView("http://localhost:8081/MKCL_Assignment_1/paperconfig/");
 	}
 }

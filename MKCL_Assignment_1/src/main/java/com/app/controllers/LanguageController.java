@@ -31,4 +31,9 @@ public class LanguageController {
 	public ModelAndView addpaper() {
 		return new ModelAndView("addPaper");
 	}
+	
+	@GetMapping("/error")
+	public ModelAndView errorpage() {
+		return new ModelAndView("error");
+	}
 }

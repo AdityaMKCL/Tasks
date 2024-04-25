@@ -18,8 +18,8 @@
         </h1>
         <br>
         
-        <p class="lead text-danger"> Please enter correct  <%=str %> </p>
-        <a class="btn btn-primary" href="index">Go back</a>
+        <p class="lead text-danger"> Please enter correct </p>
+        <a class="btn btn-primary" href="/">Go back</a>
    
        </div>
 

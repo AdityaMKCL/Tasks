@@ -17,7 +17,6 @@
 		<property name="dateModified" column="DATEMODIFIED" type="timestamp"/>
 		<property name="dateCreated" column="DATECREATED" type="timestamp"/>
 		<property name="modifiedBy" column="MODIFIEDBY" />
-		<property name="deleted" column="DELETED" />
 		<property name="eventCategory" column="EVENTCATEGORY" />
 		<property name="eventType" column="EVENTTYPE" />
 		<property name="examEventState" column="EXAMEVENTSTATE" />
