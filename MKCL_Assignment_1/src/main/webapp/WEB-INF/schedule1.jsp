@@ -4,6 +4,8 @@
 <%@page import="com.app.services.ScheduleService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +50,18 @@
 			</div>
 
 			<!-- alert ended  -->
-			<%
+			<c:choose>
+				<c:when test="${schedule==null}">
+					<form action="/MKCL_Assignment_1/schedule/save" method="GET">
+						<input type="text" value="-1" name="scheduleId" class="d-none">
+				</c:when>
+				<c:otherwise>
+					<form action="/MKCL_Assignment_1/schedule/update" method="GET">
+						<input type="text" value="${schedule.scheduleID}"
+							name="scheduleId" class="d-none">
+				</c:otherwise>
+			</c:choose>
+			<%-- <%
 			ScheduleMaster eve =  (ScheduleMaster)  request.getSession().getAttribute("schedule");
         	if(eve==null){
 			%>
@@ -58,56 +71,68 @@
 			}else {%>
 			<form action="/MKCL_Assignment_1/schedule/update" method="GET">
 				<input type="text" value="${schedule.scheduleID}" name="scheduleId" class="d-none">
-				<% }%>			
-				<div class="row">
-					<div class="col-md-4 col-12">Schedule Type *</div>
-					<div class="col-md-8 col-12">
-					
-						<select class="form-select" name="scheduleType" id="city" value="${schedule.scheduleType}">
-							<optgroup id="addoptions" >
-								<option value="DAY">DAY</option>
-								<option value="WEEK">WEEK</option>
-								<option value="CUSTOME">CUSTOM</option>
-							</optgroup>
-						</select>
-					</div>
-				</div>
-				<div class="row my-2">
-					<div class="col-md-4 col-12">Max No of Papers that can be
-						Scheduled*</div>
-					<div class="col-md-4 col-12">
-						<input type="text" class="form-control" name="maxNoOfPapers"
-							value="${schedule.maxNumberOfPapers}">
-					</div>
-					<div class="col-md-4 col-12">
-						<p class="blockquote-footer m-1 pb-1">
-							<span class="fw-bold">NOTE:</span> If kept 0 then unlimited
-							papers will be allowed
-						</p>
-					</div>
-				</div>
+				<% }%>	 --%>
+			<div class="row">
+				<div class="col-md-4 col-12">Schedule Type *</div>
+				<div class="col-md-8 col-12">
 
-				<div class="row my-2 text-start">
-					<div class="col-md-4 col-12 ">Start Date*</div>
-					<div class="col-md-8 col-12">
-						<input type="datetime-local" class="form-control w-50"
-							name="startDate" value="${schedule.scheduleStart}">
-					</div>
+					<select class="form-select" name="scheduleType" id="city"
+						value="${schedule.scheduleType}">
+						<optgroup id="addoptions">
+							<option value="DAY">DAY</option>
+							<option value="WEEK">WEEK</option>
+							<option value="CUSTOME">CUSTOM</option>
+						</optgroup>
+					</select>
 				</div>
-				<div class="row my-2 text-start">
-					<div class="col-md-4 col-12 ">End Date*</div>
-					<div class="col-md-8 col-12">
-						<input type="datetime-local" class="form-control w-50"
-							name="endDate" value="${schedule.scheduleEnd}">
-
-					</div>
+			</div>
+			<div class="row my-2">
+				<div class="col-md-4 col-12">Max No of Papers that can be
+					Scheduled*</div>
+				<div class="col-md-4 col-12">
+					<input type="text" class="form-control" name="maxNoOfPapers"
+						value="${schedule.maxNumberOfPapers}">
 				</div>
+				<div class="col-md-4 col-12">
+					<p class="blockquote-footer m-1 pb-1">
+						<span class="fw-bold">NOTE:</span> If kept 0 then unlimited papers
+						will be allowed
+					</p>
+				</div>
+			</div>
 
-				<div class="row text-center my-3">
-					<div class="col">
-						<input type="button" value="Back"
-							class="btn btn-secondary rounded-pill px-5">
-							<%
+			<div class="row my-2 text-start">
+				<div class="col-md-4 col-12 ">Start Date*</div>
+				<div class="col-md-8 col-12">
+					<input type="datetime-local" class="form-control w-50"
+						name="startDate" value="${schedule.scheduleStart}">
+				</div>
+			</div>
+			<div class="row my-2 text-start">
+				<div class="col-md-4 col-12 ">End Date*</div>
+				<div class="col-md-8 col-12">
+					<input type="datetime-local" class="form-control w-50"
+						name="endDate" value="${schedule.scheduleEnd}">
+
+				</div>
+			</div>
+
+			<div class="row text-center my-3">
+				<div class="col">
+					<a href="http://localhost:8081/MKCL_Assignment_1/paperconfig/" 
+						class="btn btn-secondary rounded-pill px-5">Back</a>
+					<c:choose>
+						<c:when test="${schedule==null}">
+							<input type="submit" value="Save Schedule"
+								class="btn btn-success rounded-pill px-4">
+						</c:when>
+						<c:otherwise>
+							<input type="submit" value="Update Schedule"
+								class="btn btn-success rounded-pill px-4">
+						</c:otherwise>
+					</c:choose>
+
+					<%-- <%
         	if(eve==null){
 			%>
 							 <input
@@ -117,12 +142,12 @@
 							 <input
 							type="submit" value="Update Schedule"
 							class="btn btn-success rounded-pill px-4">
-							<%} %>
-							<a
-							href="http://localhost:8081/MKCL_Assignment_1/schedule/redirect1"
-							class="btn btn-success rounded-pill mx-2">Proceed</a>
-					</div>
+							<%} %> --%>
+					<a
+						href="http://localhost:8081/MKCL_Assignment_1/schedule/redirect1"
+						class="btn btn-success rounded-pill mx-2">Proceed</a>
 				</div>
+			</div>
 			</form>
 			<hr>
 			<div class="row">
@@ -131,7 +156,8 @@
 			<hr>
 			<div class="row text-center">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered" style="font-weight: 400; font-size: small;">
+					<table class="table table-striped table-bordered"
+						style="font-weight: 400; font-size: small;">
 						<thead>
 							<th>Schedule Type</th>
 							<th>Starting From</th>
@@ -141,33 +167,36 @@
 							<th>Delete</th>
 						</thead>
 						<tbody>
-							<%
-                    ScheduleService service = new ScheduleService();
-                    ArrayList<ScheduleMaster> arr = service.getall();
-                    int count = 1;
-                    for (ScheduleMaster schedule : arr) {
-                    	//System.out.println(schedule.getFkExamEventID() + "  "+schedule.getMaxNumberOfPapers())
-                %>
-							<tr>
-								<td><%=schedule.getScheduleType()%></td>
-								<td><%=schedule.getScheduleStart()%></td>
-								<td><%=schedule.getScheduleEnd()%></td>
-								<td><%=count%></td>
-								<td><input type="text"
-									class="btn btn-success w-50 rounded-pill" value="Update" name="<%=schedule.getScheduleID() %>" onclick="updatethis(this)"></td>
-								<td><input type="text"
-									class="btn btn-danger w-50 rounded-pill" value="Delete" id="<%=schedule.getScheduleID() %>" onclick="deletethis(this)"></td>
-							</tr>
-							<tr style="font-weight: 400; font-size: smaller;">
-								<td></td>
-								<td colspan="2"><span class="text-start pe-3">Allow
-										Schedule Extension</span> <span class="text-end ps-5">No</span></td>
-								<td colspan="2" class="text-start">Max No of Papers that
-									can be Scheduled</td>
-								<td class="text-end"><%=schedule.getMaxNumberOfPapers()%></td>
-							</tr>
-							<%count++; %>
-							<%}%>
+							<jsp:useBean id="scheduleservice"
+								class="com.app.services.ScheduleService" />
+							<c:set var="schedulee"
+								value="${scheduleservice.getallforEvent(examEvent.examEventID)}"></c:set>
+
+							<c:set var="i" value="1" />
+							<c:forEach var="schedule" items="${schedulee}">
+								<tr>
+									<td>${schedule.scheduleType}</td>
+									<td>${schedule.scheduleStart}</td>
+									<td>${schedule.scheduleEnd}</td>
+									<td>${i}</td>
+									<td><input type="text"
+										class="btn btn-success w-50 rounded-pill" value="Update"
+										name="${schedule.scheduleID}" onclick="updatethis(this)"></td>
+									<td><input type="text"
+										class="btn btn-danger w-50 rounded-pill" value="Delete"
+										id="${schedule.scheduleID}" onclick="deletethis(this)"></td>
+
+								</tr>
+								<tr style="font-weight: 400; font-size: smaller;">
+									<td colspan="2"><span class="text-start pe-3">Allow
+											Schedule Extension</span> <span class="text-end ps-5">No</span></td>
+									<td colspan="2" class="text-start">Max No of Papers that
+										can be Scheduled</td>
+									<td class="text-end">${schedule.maxNumberOfPapers}</td>
+								</tr>
+
+								<c:set var="i" value="${i+1}" />
+							</c:forEach>
 
 						</tbody>
 					</table>
@@ -182,35 +211,41 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
-	function deletethis(param){
-	 $.ajax({
-         method: 'GET',
-         url: 'http://localhost:8081/MKCL_Assignment_1/schedule/delete/'+param.id,
-         contentType: 'application/json',
-         success: function (result) {
-             window.location.replace("http://localhost:8081/MKCL_Assignment_1/schedule/redirect");
+		function deletethis(param) {
+			$
+					.ajax({
+						method : 'GET',
+						url : 'http://localhost:8081/MKCL_Assignment_1/schedule/delete/'
+								+ param.id,
+						contentType : 'application/json',
+						success : function(result) {
+							window.location
+									.replace("http://localhost:8081/MKCL_Assignment_1/schedule/redirect");
 
-         },
-         error: function ajaxError(jqXHR) {
-             console.error('Error: ', jqXHR.responseText);
-         }
-     });
+						},
+						error : function ajaxError(jqXHR) {
+							console.error('Error: ', jqXHR.responseText);
+						}
+					});
 		}
-	function updatethis(param){
-		console.log(param);
-	 $.ajax({
-         method: 'GET',
-         url: 'http://localhost:8081/MKCL_Assignment_1/schedule/get/'+param.name,
-         contentType: 'application/json',
-         success: function (result) {
-             window.location.replace("http://localhost:8081/MKCL_Assignment_1/schedule/redirect");
+		function updatethis(param) {
+			console.log(param);
+			$
+					.ajax({
+						method : 'GET',
+						url : 'http://localhost:8081/MKCL_Assignment_1/schedule/get/'
+								+ param.name,
+						contentType : 'application/json',
+						success : function(result) {
+							window.location
+									.replace("http://localhost:8081/MKCL_Assignment_1/schedule/redirect");
 
-         },
-         error: function ajaxError(jqXHR) {
-             console.error('Error: ', jqXHR.responseText);
-         }
-     });
-			
+						},
+						error : function ajaxError(jqXHR) {
+							console.error('Error: ', jqXHR.responseText);
+						}
+					});
+
 		}
 	</script>
 </body>

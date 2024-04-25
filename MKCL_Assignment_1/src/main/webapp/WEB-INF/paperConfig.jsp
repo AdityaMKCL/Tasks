@@ -221,8 +221,9 @@
 				</div>
 				<div class="row text-center my-2">
 					<div class="col">
-						<input type="button" value="Back"
-							class="btn btn-secondary rounded-pill px-4"> <input
+					
+						<a href="http://localhost:8081/MKCL_Assignment_1/papers/addpaper" 
+						class="btn btn-secondary rounded-pill px-4">Back</a> <input
 							type="submit" value="Save"
 							class="btn btn-success rounded-pill px-4"> <a
 							href="http://localhost:8081/MKCL_Assignment_1/schedule/redirect"

@@ -7,6 +7,8 @@
 <%@page import="com.app.services.PaperService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,26 +99,23 @@
                                 <th>Maximum Time during which paper continues</th>
                             </thead>
                             <tbody>
-                            <%
-                            PaperService service = new PaperService();
-							ExamEvent eve =  (ExamEvent)  request.getSession().getAttribute("examEvent");
-                            		ArrayList<Paper> arr=new ArrayList<Paper>();
-                            				arr=service.getAllPapersList(eve.getExamEventID());
-                            for(int i=0;i<arr.size();i++){ 
-                            	Paper paper = new Paper();
-                            	paper=arr.get(i);
-                            %>
+                            <jsp:useBean id= "paperservice" class= "com.app.services.PaperService" />  
+ 					<c:set var="papers" value="${paperservice.getAllPapersList(examEvent.examEventID)}"></c:set>
+
+                           
+                            <c:set var="i" value="1"/>
+                            <c:forEach var="paper" items="${papers}">
                             <tr>
-                                <td><%= i+1 %></td>
-                                <td><%= paper.getPaperID() %></td>
-                                <td><%= paper.getCode() %></td>
-                                <td><%= paper.getName() %></td>
+                                <td>${i}</td>
+                                <td>${paper.paperID}</td>
+                                <td>${paper.code}</td>
+                                <td>${paper.name}</td>
                                 <td>000</td>
                                 <td>000</td>
                             </tr>
-                        <%
-                            } // End of for loop
-                        %>
+                            
+                            <c:set var="i" value="${i+1}"/>
+                        </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -140,28 +139,27 @@
                                 <th>No of Schedules Created</th>
                             </thead>
                             <tbody>
-							<%
-                    ScheduleService service1 = new ScheduleService();
-                    ArrayList<ScheduleMaster> arr1 = service1.getallforEvent(eve.getExamEventID());
-                    int count = 1;
-                    for (ScheduleMaster schedule : arr1) {
-                    	//System.out.println(schedule.getFkExamEventID() + "  "+schedule.getMaxNumberOfPapers())
-                %>
+                            <jsp:useBean id= "scheduleservice" class= "com.app.services.ScheduleService" />  
+ 					<c:set var="schedulee" value="${scheduleservice.getallforEvent(examEvent.examEventID)}"></c:set>
+							
+                         <c:set var="i" value="1"/>
+                            <c:forEach var="schedule" items="${schedulee}">
 							<tr>
-								<td><%=schedule.getScheduleType()%></td>
-								<td><%=schedule.getScheduleStart()%></td>
-								<td><%=schedule.getScheduleEnd()%></td>
-								<td><%=count%></td>
+								<td>${schedule.scheduleType}</td>
+								<td>${schedule.scheduleStart}</td>
+								<td>${schedule.scheduleEnd}</td>
+								<td>${i}</td>
 								</tr>
 							<tr style="font-weight: 400; font-size: smaller;">
 								<td colspan="2"><span class="text-start pe-3">Allow
 										Schedule Extension</span> <span class="text-end ps-5">No</span></td>
 								<td colspan="2" class="text-start">Max No of Papers that
 									can be Scheduled</td>
-								<td class="text-end"><%=schedule.getMaxNumberOfPapers()%></td>
+								<td class="text-end">${schedule.maxNumberOfPapers}</td>
 							</tr>
-							<%count++; %>
-							<%}%>
+							
+                            <c:set var="i" value="${i+1}"/>
+                        </c:forEach>
 
 						</tbody>
                         </table>
