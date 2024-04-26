@@ -40,8 +40,8 @@
 		<mapping resource="ExamEvent.hbm.xml" /> 
 		<mapping resource="Paper.hbm.xml" />
 		<mapping resource="ScheduleMaster.hbm.xml" />
-<!-- 		<mapping resource="SchedulePaperAssociation.hbm.xml" /> 
- -->		<mapping resource="NaturalLanguage.hbm.xml" />
+        <mapping resource="SchedulePaperAssociation.hbm.xml" /> 
+		<mapping resource="NaturalLanguage.hbm.xml" />
 
 		
 	</session-factory>

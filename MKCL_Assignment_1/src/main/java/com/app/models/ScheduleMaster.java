@@ -124,6 +124,11 @@ public class ScheduleMaster {
 	public void setDeleted(char deleted) {
 		this.deleted = deleted;
 	}
+
+	@Override
+	public String toString() {
+		return scheduleID + ","+  scheduleStart + "," +scheduleEnd ;
+	}
 	
 }
 

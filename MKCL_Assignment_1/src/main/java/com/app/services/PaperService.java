@@ -28,5 +28,12 @@ public class PaperService {
 		arr=dao.getAllPapersList(ExameventId);
 		return arr;
 	}
+	public String getAllPapersByEvent(Long id) {
+		return dao.getAllPapersListByEvent(id);
+	}
+	public String getAllFullPapersByEvent(Long id) {
+		return dao.getAllPapersList(id).toString();
+		
+	}
 	
 }

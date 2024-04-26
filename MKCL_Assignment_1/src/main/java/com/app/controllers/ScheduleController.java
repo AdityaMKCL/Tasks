@@ -2,6 +2,7 @@ package com.app.controllers;
 
 import java.net.http.HttpRequest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -104,6 +106,20 @@ public class ScheduleController {
 		}else ans="error";
 		
 		return ans;
+	}
+	
+	@ResponseBody
+	@GetMapping(("/getlist/{id}"))
+	public String getAllScheduleByEvent(@PathVariable Long id) {
+		ArrayList<ScheduleMaster> arr= new ArrayList<>();
+		ScheduleService service = new ScheduleService();
+		String ans="";
+		arr= service.getallforEvent(id);
+		for(ScheduleMaster master:arr) {
+			ans+=master.toString();
+			ans+=",";
+		}
+		return ans.substring(0, ans.length()-1);
 	}
 	
 	

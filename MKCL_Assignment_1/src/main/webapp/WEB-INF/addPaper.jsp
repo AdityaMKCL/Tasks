@@ -155,6 +155,9 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
 		 	 const map1 = new Map();
+		 	 const map2 = new Map();
+		 	 var globaly= new Array();
+			 var cart= new Set();
          $(document).ready(function () {
                 $.ajax({
                     method: 'GET',
@@ -172,7 +175,10 @@
                         var html=``;
                         for (let i = 2; i < arr.length; i+=3) {
                            arr[i-1]=arr[i-1].trim();
+                           arr[i-2]=arr[i-2].trim();
+                           //console.log(arr[i-2]+"   "+arr[i-1]);
                            map1.set(arr[i-1], arr[i-2]);
+                           map2.set(arr[i-2], arr[i-1]);
                              html+=`<tr id="`+arr[i-1]+`">`;
                                 html+=`<td>`+arr[i] + `</td>`;
                                 html+=`<td>`+arr[i-1] + `</td>`;
@@ -182,18 +188,49 @@
                         }
                         console.log(html);
                         document.getElementById("newdata").innerHTML += html;
+
+
+                        $.ajax({
+                            method: 'GET',
+                            url: 'http://localhost:8081/MKCL_Assignment_1/papers/listForEvent/'+${examEvent.examEventID},
+                            contentType: 'application/json',
+                            success: function (result) {
+                               console.log(result);
+                                
+                                result = result.replaceAll("]", "").replaceAll("[", ""); // Removing square brackets
+                                var arr = result.split(",");
+                                console.log(map2.get("1"));
+                                arr.forEach(function (paperName) {
+                                   // console.log(paperName);
+                                    const trimmedName = paperName.trim();
+                                   // console.log(trimmedName);
+                                    const paperCode = map2.get(trimmedName);
+                                    globaly.push(trimmedName);
+                                    //console.log(map2.get(paperCode));
+                                    var result= document.getElementById(paperCode+"1");
+                                    loaddoc(result);
+                                    //console.log(result);
+                                });
+                                //console.log(result);
+                            },
+                            error: function ajaxError(jqXHR) {
+                                console.error('Error: ', jqXHR.responseText);
+                            }
+                        });
+                        
                     },
                     error: function ajaxError(jqXHR) {
                         console.error('Error: ', jqXHR.responseText);
                     }
                 });
 
+              
+                
+
             })
-            
-			 var cart= new Set();
+
             function loaddoc(param){
              cart.add(param.name);
-             param.name=param.name.trim();
              console.log(cart);
              $('#'+param.name+'').addClass("d-none");
              console.log('#'+param.name+'')
@@ -206,7 +243,6 @@
              document.getElementById("count").innerText=cart.size;
              //document.getElementById("newdata").innerHTML=data;
 				cartModelLoad();
-				
              }
 			
 		 function cartModelLoad(){
@@ -222,7 +258,7 @@
         	});
          document.getElementById("modelload").innerHTML=html;
 		}
-		 function deletedoc( param){			 console.log(param.name);
+		 function deletedoc(param){			 console.log(param.name);
 
 					const parent = document.getElementById("modelload");
 					const child =document.getElementById(param.name);
@@ -240,25 +276,56 @@
 		function savepapers(){
 			console.log(cart);
 			var mySet =new Array();
+			//console.log(globaly)
 			cart.forEach((ele)=>{
-			    mySet.push(map1.get(ele));
+				
+				ele=ele.trim();
+				//console.log(map1.get(ele).trim())
+				if(!globaly.includes(map1.get(ele).trim()))mySet.push(map1.get(ele));
 			});
-			console.log(mySet);
+			//console.log(mySet);
 			var data={papers: mySet.toString(),
 					 };
+
+
+			var deleteSet = new Array();
+			globaly.forEach((ele)=>{
+				ele=ele.trim();
+				//console.log(cart);
+				//console.log(map2.get(ele).trim);
+				if(!cart.has(map2.get(ele)))deleteSet.push(ele);
+				})
+			var data2={papers: deleteSet.toString(),
+					 };
+			//console.log(deleteSet);
+		
 			 $.ajax({
                  method: 'GET',
-                 url: 'http://localhost:8081/MKCL_Assignment_1/exameventpaper/savepapers',
+                 url: 'http://localhost:8081/MKCL_Assignment_1/exameventpaper/deletepapers',
                  contentType: 'application/json',
-                 data : data,
+                 data : data2,
                  success: function (result) {
-                    console.log(result);
+                    $.ajax({
+                        method: 'GET',
+                        url: 'http://localhost:8081/MKCL_Assignment_1/exameventpaper/savepapers',
+                        contentType: 'application/json',
+                        data : data,
+                        success: function (result) {
+                           console.log(result);
+                        },
+                        error: function ajaxError(jqXHR) {
+                            console.error('Error: ', jqXHR.responseText);
+                        }
+                    })
                  },
                  error: function ajaxError(jqXHR) {
                      console.error('Error: ', jqXHR.responseText);
                  }
              });
-			}
+
+			 
+			/*  ;*/
+			} 
 	        
     </script>
 

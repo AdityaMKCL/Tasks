@@ -32,9 +32,21 @@ public class ExamEventPaperDetailsController {
 		System.out.println();
 		ExamEvent event = (ExamEvent) request.getSession().getAttribute("examEvent");
 		ExamEventPaperService service = new ExamEventPaperService();
+		if(mySet.length()>0)
 		service.savePapers(mySet, event);
 		return ans;
 
+	}
+	@ResponseBody
+	@GetMapping("/deletepapers")
+	public String deletePapers(@RequestParam("papers") String mySet, HttpServletRequest request) {
+		System.out.println("inside delete paper controller");
+		String ans = "";
+		ExamEvent event = (ExamEvent) request.getSession().getAttribute("examEvent");
+		ExamEventPaperService service = new ExamEventPaperService();
+		if(mySet.length()>0)
+		service.deletePapers(mySet, event);
+		return ans;
 	}
 
 	@ResponseBody

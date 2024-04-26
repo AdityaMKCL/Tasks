@@ -47,4 +47,36 @@ public ISql curd=DALHelper.getIsql();
 		
 		return arr1;
 	}
+
+	public String getAllPapersListByEvent(Long id) {
+		System.out.println("inside the main dao ");
+		String answer="";
+		List<ExamEventPaperDetails> li= new ArrayList<>();
+		try {
+			li=curd.findBy(ExamEventPaperDetails.class, "examEventID", id);
+			ArrayList<Long> arr= new ArrayList<Long>();
+			for(ExamEventPaperDetails e: li) {
+					arr.add(e.getFkPaperID());
+					System.out.println(e.getFkPaperID());
+			}
+			answer=arr.toString();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
+	public String getAllFullPapersByEvent(Long id) {
+		List<String> arr= new ArrayList<>();
+		String ans= "";
+		try {
+			String hql = "SELECT  p.name,p.paperID FROM " + Paper.class.getName() + " p , "+ ExamEventPaperDetails.class.getName()+" e WHERE e.examEventID =" + id +" and e.fkPaperID=p.paperID ";
+			 arr =curd.executeQuery(hql);
+			 System.out.println("inside exameventdetaildao");
+			ans=arr.toString();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ans;
+	}
 }

@@ -1,7 +1,9 @@
 package com.app.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.app.models.ExamEventPaperDetails;
 
@@ -40,6 +42,26 @@ public class ExamEventPaperDao {
 			e.printStackTrace();
 		}
 		return arr;
+	}
+	public boolean deleteAllExamExamEventPapers(ArrayList<Long> arr, long eventId) {
+		boolean flag=true;
+		try {
+			for(Long i : arr) {
+				ExamEventPaperDetails edail=new ExamEventPaperDetails();
+				edail.setExamEventID(eventId);
+				edail.setFkPaperID(i);
+				Map<String,Long> mapping=new HashMap<>();
+				mapping.put("examEventID",eventId);
+				mapping.put("fkPaperID",i);
+				System.out.println("inside the delete dao ");
+				curd.deleteBy(ExamEventPaperDetails.class, mapping);
+			}
+			
+		}catch(Exception e) {
+			flag=false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

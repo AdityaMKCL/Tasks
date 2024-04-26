@@ -39,4 +39,17 @@ public class ExamEventPaperService {
 		return e;
 	}
 
+	public boolean deletePapers(String mySet, ExamEvent event) {
+		boolean flag=true;
+		ArrayList<Long> arr=new ArrayList<Long>();
+		for(String tem:mySet.split(",")) {
+			arr.add(Long.parseLong(tem.trim()));
+		}
+		long eventId=event.getExamEventID();
+		ExamEventPaperDao edao=new ExamEventPaperDao();
+		flag=edao.deleteAllExamExamEventPapers(arr,eventId);
+		return flag;
+		
+	}
+
 }
