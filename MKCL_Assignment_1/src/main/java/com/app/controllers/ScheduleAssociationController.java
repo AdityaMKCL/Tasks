@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.services.ScheduleAssociationService;
 
@@ -27,6 +28,13 @@ public class ScheduleAssociationController {
 		service.saveData(eventId,paperId,scheduleId);
 		
 		return "index";
+	}
+	@ResponseBody
+	@GetMapping("/getalreadyList")
+	public String getAllList(@RequestParam("eventId") Long eventId,@RequestParam("scheduleId") Long scheduleId) {
+		ScheduleAssociationService service = new ScheduleAssociationService();
+		return service.getListOfPapers(eventId,scheduleId);
+		
 	}
 	
 }

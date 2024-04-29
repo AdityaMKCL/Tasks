@@ -82,47 +82,7 @@
                 </div>
 
             </div>
-           <!--  <div class="row my-2">
-                <div class="alert alert-success text-primary border-1 border-primary fw-bold" style="color: rgb(12, 58, 176)!important;border: 1px solid rgb(12, 58, 176)!important;;">You can schedule unlimited papers
-                </div>
-            </div>
-            <div class="row">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered text-center">
-                        <thead>
-                            <th colspan="1">Display Category</th>
-                            <th colspan="4">Papers</th>
-                            <th colspan="1">Add More</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="1">English</td>
-                                <td colspan="4" rowspan="2">
-                                    <div class="row p-3">
-                                        <div class="col-md-6 col-12 text-start" id="eventName">Testing this</div>
-                                        <div class="col-md-6 col-12 text-end"><button
-                                                class="btn btn-danger m-0 p-2">Remove</button></div>
-                                    </div>
-                                    <div class="row p-2">
-                                        <select class="form-select" name="examEvent" id="city">
-                                            <optgroup id="addoptions">
-                                                <option value="DAY">event1</option>
-                                                <option value="WEEK">event2</option>
-                                                <option value="CUSTOME">event3</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td colspan="1"> <button class="btn btn-success rounded-pill px-4 py-1">Add
-                                        More</button> </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div> -->
+  
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
@@ -164,34 +124,6 @@
                 }
 
             });
-           /*  $.ajax({
-                method: 'GET',
-                url: 'http://localhost:8081/MKCL_Assignment_1/papers/getlist/' + hello.value,
-                contentType: 'application/json',
-                success: function (result) {
-                    console.log(result);
-                    let string = `<option value="" disabled selected hidden>Select your option</option>`;
-                    document.getElementById("putoptions").innerHTML = string;
-                    result = result.substring(1, result.length - 1);
-                    const arr = result.split(",");
-                    console.log("Clicked");
-                    console.log(arr);
-                    for (let i = 0; i < arr.length; i+=3) {
-                        var element = arr[i];
-						console.log(element);
-                        string += "<option value=" + element + "> Start Date :" + arr[i+1] + "   End Date : "+arr[i+2]+ "</option>"
-
-                    }
-
-                    //console.log(string);
-                    document.getElementById("putoptions").innerHTML = string;
-                    //document.getElementById("eventName").innertext = 
-                },
-                error: function ajaxError(jqXHR) {
-                    console.error('Error: ', jqXHR.responseText);
-                }
-
-            }); */
 
 
             $.ajax({
@@ -208,13 +140,13 @@
                     document.getElementById("getoptions").innerHTML = string;
                     result = result.substring(0, result.length - 1);
                     const arr2 = result.split(",");
-                    console.log("Clicked");
-                    console.log(arr2);
+                    //console.log("Clicked");
+                    //console.log(arr2);
                     for (let i = 0; i < arr2.length; i+=3) {
                         var element = arr2[i];
-                        console.log("loop");
-						console.log(element);
-                        string += "<option value=" + element + ">" + arr2[i+1] + "</option>"
+                       // console.log("loop");
+						//console.log(element);
+                        string += "<option value=" + element + " id="+element+">" + arr2[i+1] + "</option>"
 
                     }
 
@@ -233,8 +165,27 @@
         function setDate(param){
             
             document.getElementById("putDate").innerText =param.options[param.selectedIndex].text;
-    		
+    		console.log(param.value);
+			console.log(document.getElementById("city").value);
 
+			var data={eventId:document.getElementById("city").value,scheduleId:param.value};
+			$.ajax({
+                method: 'GET',
+                url: 'http://localhost:8081/MKCL_Assignment_1/scheduleassoci/getalreadyList',
+                contentType: 'application/json',
+                data:data,
+                success: function (result) {
+                   console.log(result);
+                   var teavere=result.split(",");
+                   for(var m=0;m<teavere.length;m++){
+
+                	   document.getElementById(teavere[m]).remove();
+                       }
+                },
+                error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
+                }
+            });
             }
         </script>
 </body>
