@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.services.ScheduleAssociationService;
+import com.app.utils.Validator;
 
 @Controller
 @RequestMapping("/scheduleassoci")
@@ -24,10 +25,10 @@ public class ScheduleAssociationController {
 		boolean flag=false;
 		
 		ScheduleAssociationService service = new ScheduleAssociationService();
-		
+		if(!Validator.validateScheduleAssociation(eventId,scheduleId,paperId))return "error";
 		service.saveData(eventId,paperId,scheduleId);
 		
-		return "index";
+		return "scheduleassociation";
 	}
 	@ResponseBody
 	@GetMapping("/getalreadyList")

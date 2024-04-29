@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.app.models.ExamEvent;
 import com.app.models.ScheduleMaster;
 import com.app.services.ScheduleService;
+import com.app.utils.Validator;
 
 @Controller
 @RequestMapping("/schedule")
@@ -52,6 +53,10 @@ public class ScheduleController {
 		    HttpSession session=request.getSession();
 		    ExamEvent e=(ExamEvent) session.getAttribute("examEvent");
 		    ScheduleMaster schedulemas= new ScheduleMaster(startDatee,endDatee,e.getExamEventID(),scheduleType,maxNoOfPapers);
+		    if(!Validator.validateSchedule(schedulemas)) {
+		    	return "error";
+		    }
+		    	
 		    ScheduleService service = new ScheduleService();
 		    service.saveSchedule(schedulemas);
 		}catch(Exception e){
@@ -75,6 +80,9 @@ public class ScheduleController {
 			HttpSession session=request.getSession();
 			ExamEvent e=(ExamEvent) session.getAttribute("examEvent");
 			ScheduleMaster schedulemas= new ScheduleMaster(scheduleId,startDatee,endDatee,e.getExamEventID(),scheduleType,maxNoOfPapers);
+			if(!Validator.validateSchedule(schedulemas)) {
+		    	return "error";
+		    }
 			ScheduleService service = new ScheduleService();
 			session.setAttribute("schedule", null);
 			service.updateSchedule(schedulemas);

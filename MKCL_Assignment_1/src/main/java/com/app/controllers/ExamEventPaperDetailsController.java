@@ -21,6 +21,7 @@ import com.app.models.ExamEvent;
 import com.app.models.ExamEventPaperDetails;
 import com.app.models.paperDto;
 import com.app.services.ExamEventPaperService;
+import com.app.utils.Validator;
 
 @Controller
 @RequestMapping("/exameventpaper")
@@ -88,10 +89,14 @@ public class ExamEventPaperDetailsController {
 		 ExamEventPaperDetails edetail=new ExamEventPaperDetails(eventid, Long.parseLong(paper),noOfAttempts,getit(optionRandomization),
 				 examType, getit(identicaloptions),getit(identicalItems), getit(skipQuestion),
 					getit(answerChange),getit(showNotepad), getit(doublePalletNavigation));
+		 if(Validator.validatePaper(paper, examType, noOfAttempts, identicaloptions, identicalItems, optionRandomization, doublePalletNavigation, skipQuestion, answerChange, showNotepad)) {
+			 return new RedirectView("http://localhost:8081/MKCL_Assignment_1/error");
+		 }else {
 		ExamEventPaperService service = new ExamEventPaperService();
 		//System.out.println(edetail.toString());
 		service.savePaperDetails(edetail);
 		System.out.println("in the save papers controller ");
 		return new RedirectView("http://localhost:8081/MKCL_Assignment_1/paperconfig/");
+		 }
 	}
 }
