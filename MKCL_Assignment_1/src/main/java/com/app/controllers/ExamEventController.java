@@ -25,6 +25,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.app.models.ExamEvent;
 import com.app.services.ExamEventService;
 import com.app.services.ScheduleService;
+import com.app.utils.Validator;
 import com.google.protobuf.TextFormat.ParseException;
 
 @Controller
@@ -47,23 +48,27 @@ public class ExamEventController {
 			    Date endDatee = dateFormat.parse(endDate);
 			    
 			    ExamEvent examEvent = new ExamEvent(examEventCode,name, startDatee, endDatee, defaultLanguageID);
+			    String validation=Validator.validateExamEvent(examEvent);
+			    if(validation!=null) {
+			    	md.setViewName("error");
+			    }else {
 			    service.saveExamDetail(examEvent);
 			    md.setViewName("index");
-			    request.setAttribute("msg", "Data is saved succesfully");
+			    request.setAttribute("success", "Data is saved succesfully");
 			   HttpSession session = request.getSession();
 			   ExamEvent e=service.findExamEvent(examEvent);
 			   session.setAttribute("examEvent", e);
 			   System.out.println(e);
+			    }
 			} catch (java.text.ParseException e) {
 				request.setAttribute("msg", "Some error occured ");
-			    e.printStackTrace(); 
+			    e.printStackTrace();
 			    md.setViewName("error");
 			} catch (Exception e) {
 				request.setAttribute("msg", "Some error occured ");
 			    e.printStackTrace(); 
 			    md.setViewName("error");
 			}
-		 
 		 return md;
 	}
 	

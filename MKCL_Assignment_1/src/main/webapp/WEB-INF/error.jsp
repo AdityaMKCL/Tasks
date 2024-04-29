@@ -18,8 +18,8 @@
         </h1>
         <br>
         
-        <p class="lead text-danger"> Please enter correct </p>
-        <a class="btn btn-primary" href="/">Go back</a>
+        <p class="lead text-danger"> Please enter correct Data</p>
+        <a class="btn btn-primary" href="http://localhost:8081/MKCL_Assignment_1/">Go back</a>
    
        </div>
 

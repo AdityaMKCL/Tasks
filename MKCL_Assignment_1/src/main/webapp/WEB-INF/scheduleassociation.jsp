@@ -90,34 +90,25 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
         <script >
-        function loadDoc(hello) {
-            console.log("helloload");
-            console.log(hello.value);
-			console.log(hello.name);
+			
+			var list="";
+           function loadDoc(hello) {
 
             $.ajax({
                 method: 'GET',
                 url: 'http://localhost:8081/MKCL_Assignment_1/schedule/getlist/' + hello.value,
                 contentType: 'application/json',
                 success: function (result) {
-                    console.log("inside it");
-                    console.log(result);
                     let string = `<option value="" disabled selected hidden>Select your option</option>`;
                     document.getElementById("putoptions").innerHTML = string;
-                   // result = result.substring(1, result.length - 1);
                     const arr = result.split(",");
-                    console.log("Clicked");
-                    console.log(arr);
                     for (let i = 0; i < arr.length; i+=3) {
                         var element = arr[i];
-						console.log(element);
                         string += "<option value=" + element + "> Start Date :" + arr[i+1] + "   End Date : "+arr[i+2]+ "</option>"
 
                     }
 
-                    //console.log(string);
                     document.getElementById("putoptions").innerHTML = string;
-                    //document.getElementById("eventName").innertext = 
                 },
                 error: function ajaxError(jqXHR) {
                     console.error('Error: ', jqXHR.responseText);
@@ -125,45 +116,41 @@
 
             });
 
-
-            $.ajax({
-                method: 'GET',
-                url: 'http://localhost:8081/MKCL_Assignment_1/papers/listForEventWithFullName/'+ hello.value,
-                contentType: 'application/json',
-                success: function (result) {
-                   console.log(result);
-                    
-                    result = result.replaceAll("]", "").replaceAll("[", ""); // Removing square brackets
-                    var arr = result.split(",");
-
-                    let string = `<option value="" disabled selected hidden>Select your option</option>`;
-                    document.getElementById("getoptions").innerHTML = string;
-                    result = result.substring(0, result.length - 1);
-                    const arr2 = result.split(",");
-                    //console.log("Clicked");
-                    //console.log(arr2);
-                    for (let i = 0; i < arr2.length; i+=3) {
-                        var element = arr2[i];
-                       // console.log("loop");
-						//console.log(element);
-                        string += "<option value=" + element + " id="+element+">" + arr2[i+1] + "</option>"
-
-                    }
-
-                    //console.log(string);
-                    document.getElementById("getoptions").innerHTML = string;
-                    //console.log(result);
-                },
-                error: function ajaxError(jqXHR) {
-                    console.error('Error: ', jqXHR.responseText);
-                }
-            });
-
+			getPaperList(hello.value);
+           }
+function getPaperList(id){
+	$.ajax({
+        method: 'GET',
+        url: 'http://localhost:8081/MKCL_Assignment_1/papers/listForEventWithFullName/'+ id,
+        contentType: 'application/json',
+        success: function (result) {
+           console.log(result);
             
-            
+            result = result.replaceAll("]", "").replaceAll("[", ""); // Removing square brackets
+            var arr = result.split(",");
+
+            let string = `<option value="" disabled selected hidden>Select your option</option>`;
+            document.getElementById("getoptions").innerHTML = string;
+            result = result.substring(0, result.length - 1);
+            const arr2 = result.split(",");
+            for (let i = 0; i < arr2.length; i+=3) {
+                var element = arr2[i];
+                string += "<option value=" + element + " id="+element+">" + arr2[i+1] + "</option>"
+
+            }
+
+            document.getElementById("getoptions").innerHTML = string;
+            list= string;
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
         }
-        function setDate(param){
+    });
+}
+        
+        async function setDate(param){
             
+        	document.getElementById("getoptions").innerHTML = list;
             document.getElementById("putDate").innerText =param.options[param.selectedIndex].text;
     		console.log(param.value);
 			console.log(document.getElementById("city").value);
@@ -178,8 +165,8 @@
                    console.log(result);
                    var teavere=result.split(",");
                    for(var m=0;m<teavere.length;m++){
-
-                	   document.getElementById(teavere[m]).remove();
+						const element=document.getElementById(teavere[m]);
+                	  if(element !=null) element.remove(element.selectedIndex);
                        }
                 },
                 error: function ajaxError(jqXHR) {

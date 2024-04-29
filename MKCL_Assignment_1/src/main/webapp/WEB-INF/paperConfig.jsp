@@ -256,7 +256,7 @@
                  const arr = result.split(",");
                  for (let i = 2; i < arr.length; i+=3) {
 
-                     string += "<option value=" + arr[i-2] + " id=" + arr[i-2] + " disabled>" + arr[i-1] + "</option>"
+                     string += "<option value=" + arr[i-2] + " id=" + arr[i-2] + " class='d-none' disabled>" + arr[i-1] + "</option>"
 
                  }
                  console.log(string);
@@ -273,6 +273,7 @@
                  result = result.substring(1, result.length - 1);
                  const arr = result.split(",");
 					 for (let i = 0; i < arr.length; i++) {
+                	 $('#'+arr[i].trim()).removeClass("d-none");
                 	 $('#'+arr[i].trim()).removeAttr("disabled");
                     
                  }  

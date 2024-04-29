@@ -76,6 +76,16 @@
                         </div>
                     </div>
                 </form>
+                
+                <c:choose>
+				<c:when test="${success!=null}">
+				<div class="text-success">
+					<c:out value="Event Succesfullt added Select from below dropdown"/>
+				</div>
+				</c:when>
+				
+			</c:choose>
+                
                 <jsp:useBean id= "eventservice" class= "com.app.services.ExamEventService" >  
  					<c:set var="events" value="${eventservice.allEvents}"></c:set>
 				</jsp:useBean> 

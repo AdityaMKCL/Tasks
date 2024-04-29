@@ -79,7 +79,7 @@ public class ExamEventPaperDetailsController {
 			@RequestParam("showNotepad") String showNotepad, HttpServletRequest request
 
 	) {
-
+			
 		HttpSession session = request.getSession();
 		ExamEvent e = (ExamEvent) session.getAttribute("examEvent");
 		Long eventid=e.getExamEventID();
