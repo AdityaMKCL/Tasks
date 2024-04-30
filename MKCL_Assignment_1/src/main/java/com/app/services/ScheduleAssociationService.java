@@ -1,6 +1,9 @@
 package com.app.services;
 
+import java.util.ArrayList;
+
 import com.app.dao.ScheduleAssociationDao;
+import com.app.models.DisplayFinalDto;
 
 public class ScheduleAssociationService {
 
@@ -16,6 +19,14 @@ public class ScheduleAssociationService {
 		ScheduleAssociationDao dao= new ScheduleAssociationDao();
 		return dao.getListOfPapers(eventId,scheduleId);
 		
+	}
+	
+	public ArrayList<DisplayFinalDto> getEventPaperSchedule(){
+		ArrayList<DisplayFinalDto> arr=new ArrayList<DisplayFinalDto>();
+		ScheduleAssociationDao dao= new ScheduleAssociationDao();
+
+		arr=dao.getEventPaperSchedule();
+		return arr;
 	}
 
 }

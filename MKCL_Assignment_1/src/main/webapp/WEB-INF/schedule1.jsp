@@ -52,11 +52,11 @@
 			<!-- alert ended  -->
 			<c:choose>
 				<c:when test="${schedule==null}">
-					<form action="/MKCL_Assignment_1/schedule/save" method="GET">
+					<form action="/MKCL_Assignment_1/schedule/save" method="GET" onSubmit="return Validate()">
 						<input type="text" value="-1" name="scheduleId" class="d-none">
 				</c:when>
 				<c:otherwise>
-					<form action="/MKCL_Assignment_1/schedule/update" method="GET">
+					<form action="/MKCL_Assignment_1/schedule/update" method="GET" onSubmit="return Validate()">
 						<input type="text" value="${schedule.scheduleID}"
 							name="scheduleId" class="d-none">
 				</c:otherwise>
@@ -90,7 +90,7 @@
 				<div class="col-md-4 col-12">Max No of Papers that can be
 					Scheduled*</div>
 				<div class="col-md-4 col-12">
-					<input type="text" class="form-control" name="maxNoOfPapers"
+					<input type="text" class="form-control" name="maxNoOfPapers" id="maxNoOfPapers"
 						value="${schedule.maxNumberOfPapers}">
 				</div>
 				<div class="col-md-4 col-12">
@@ -105,17 +105,18 @@
 				<div class="col-md-4 col-12 ">Start Date*</div>
 				<div class="col-md-8 col-12">
 					<input type="datetime-local" class="form-control w-50"
-						name="startDate" value="${schedule.scheduleStart}">
+						name="startDate" id="startDate" value="${schedule.scheduleStart}">
 				</div>
 			</div>
 			<div class="row my-2 text-start">
 				<div class="col-md-4 col-12 ">End Date*</div>
 				<div class="col-md-8 col-12">
 					<input type="datetime-local" class="form-control w-50"
-						name="endDate" value="${schedule.scheduleEnd}">
+						name="endDate" id="endDate" value="${schedule.scheduleEnd}">
 
 				</div>
 			</div>
+		<p class="text-danger fw-bold" id="Message"></p>
 
 			<div class="row text-center my-3">
 				<div class="col">
@@ -246,6 +247,34 @@
 						}
 					});
 
+		}
+
+		function Validate() {
+			var maxNoOfPapers = $("#maxNoOfPapers").val();
+			var accommodationSelect = $("#city");
+			const scheduleType = accommodationSelect.val();
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			const d = new Date();
+			const start = new Date(startDate);
+			const end = new Date(endDate);
+			if (maxNoOfPapers == "" || maxNoOfPapers == undefined) {
+				$("#Message").text( "please enter maximum numbers of papers that are allowed");
+				return false;
+			} else if (scheduleType == ""
+					|| scheduleType == undefined) {
+				$("#Message").text("please select the schedule type") ;
+				return false;
+			} else if (start < d || start=="" || start==undefined || start=="Invalid Date") {
+				$("#Message").text("please enter a valid start date") ;
+				return false;
+
+			} else if (end < start || end=="" || end==undefined || end=="Invalid Date") {
+				$("#Message").text("End date is not valid according to start date") ;
+				return false;
+			}
+
+			return true;
 		}
 	</script>
 </body>

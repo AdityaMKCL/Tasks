@@ -43,7 +43,8 @@
 			</div>
 
 			<!-- alert ended  -->
-			<form action="/MKCL_Assignment_1/exameventpaper/finalPaper">
+			<form action="/MKCL_Assignment_1/exameventpaper/finalPaper"
+				onSubmit="return Validate()">
 
 				<div class="row">
 					<div class="col-md-3 col-12">Select Paper *</div>
@@ -69,7 +70,7 @@
 						Exam Type <i class="fa fa-question-circle"></i>
 					</div>
 					<div class="col-md-7 col-12">
-						<select class="form-select" name="examType" id="city">
+						<select class="form-select" name="examType" id="city2">
 							<optgroup id="">
 								<option value="1">PRACTICE</option>
 								<option value="2">MAIN</option>
@@ -82,7 +83,7 @@
 						No.of Attempts <i class="fa fa-question-circle"></i>
 					</div>
 					<div class="col-md-7 col-12">
-						<input type="text" class="w-50 form-control" name="NoOfAttempts">
+						<input type="text" class="w-50 form-control" name="NoOfAttempts" id="NoOfAttempts" placeholder="0">
 					</div>
 				</div>
 				<div class="row my-2 text-success">
@@ -219,11 +220,12 @@
 						</div>
 					</div>
 				</div>
+				<p class="text-danger fw-bold" id="Message"></p>
 				<div class="row text-center my-2">
 					<div class="col">
-					
-						<a href="http://localhost:8081/MKCL_Assignment_1/papers/addpaper" 
-						class="btn btn-secondary rounded-pill px-4">Back</a> <input
+
+						<a href="http://localhost:8081/MKCL_Assignment_1/papers/addpaper"
+							class="btn btn-secondary rounded-pill px-4">Back</a> <input
 							type="submit" value="Save"
 							class="btn btn-success rounded-pill px-4"> <a
 							href="http://localhost:8081/MKCL_Assignment_1/schedule/redirect"
@@ -294,6 +296,62 @@
          
 
      })
+     
+     function Validate() {
+		 var radio1=$('input[name="IdenticalOptions"]:checked').val();
+		 var radio2=$('input[name="identicalItems"]:checked').val();
+		 var radio3=$('input[name="optionRandomization"]:checked').val();
+		 var radio4=$('input[name="doublePalletNavigation"]:checked').val();
+		 var radio5=$('input[name="skipQuestion"]:checked').val();
+		 var radio6=$('input[name="answerChange"]:checked').val();
+		 var radio7=$('input[name="showNotepad"]:checked').val();
+			var NoOfAttempts = $("#NoOfAttempts").val();
+			
+			var accommodationSelect = $("#city");
+			const Paper = accommodationSelect.val();
+			var accommodationSelect2 = $("#city2");
+			const examType = accommodationSelect2.val();
+			console.log(NoOfAttempts);
+			if (NoOfAttempts == "" || NoOfAttempts == undefined) {
+				$("#Message").text("Please enter the number of attempts");
+				return false;
+			} else if (Paper == "" || Paper == undefined) {
+				$("#Message").text( "please Select the paper");
+				return false;
+			} else if (examType == "" || examType == undefined) {
+				$("#Message").text("please Select exam type") ;
+				return false;
+			
+			} else if (radio1 == "" || radio1 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+			
+			} else if (radio2 == "" || radio2 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+		 
+			} else if (radio3 == "" || radio3 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+			
+			} else if (radio4 == "" || radio4 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+		
+			} else if (radio5 == "" || radio5 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+			
+			} else if (radio6 == "" || radio6 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+			
+			} else if (radio7 == "" || radio7 == undefined) {
+				$("#Message").text("please Select all the radio buttons ") ;
+				return false;
+			} 
+			return true;
+		}
 	</script>
 </body>
 

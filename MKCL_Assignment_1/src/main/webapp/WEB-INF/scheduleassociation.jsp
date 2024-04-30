@@ -24,7 +24,7 @@
                     Schedule Test
                 </div>
             </div>
-            <form action="/MKCL_Assignment_1/scheduleassoci/save" method="GET">
+            <form action="/MKCL_Assignment_1/scheduleassoci/save" method="GET" onSubmit="return Validate()">
             <div class="row  text-start my-4">
                 <div class="col-md-4 col-12">
                     Exam Event*
@@ -50,7 +50,7 @@
                     Schedules
                 </div>
                 <div class="col-md-8 col-12">
-                    <select class="form-select" name="scheduleId" id="city" onchange="setDate(this)">
+                    <select class="form-select" name="scheduleId" id="city1" onchange="setDate(this)">
                         <optgroup id="putoptions">
                         </optgroup>
                     </select>
@@ -67,6 +67,8 @@
                     </select>
                 </div>
             </div>
+            		<p class="text-danger fw-bold" id="Message"></p>
+            
             <div class="row  text-start my-3">
                 <div class="col-md-4 col-12">
 
@@ -82,6 +84,38 @@
                 </div>
 
             </div>
+            
+            
+            
+             <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <th>Sr no</th>
+                                <th>Event</th>
+                                <th>Paper Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </thead>
+                            <tbody>
+                            <jsp:useBean id= "paperservice" class= "com.app.services.ScheduleAssociationService" />  
+ 					<c:set var="schedule" value="${paperservice.getEventPaperSchedule()}"></c:set>
+
+                           
+                            <c:set var="i" value="1"/>
+                            <c:forEach var="paper" items="${schedule}">
+                            <tr>
+                                <td>${i}</td>
+                                <td>${paper.event}</td>
+                                <td>${paper.paper}</td>
+                                <td>${paper.startDate}</td>
+                                <td>${paper.endDate}</td>
+                            </tr>
+                            
+                            <c:set var="i" value="${i+1}"/>
+                        </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
   
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -174,6 +208,28 @@ function getPaperList(id){
                 }
             });
             }
+
+
+        function Validate() {
+			var accommodationSelect = $("#city");
+			const examEvent = accommodationSelect.val();
+			var accommodationSelect = $("#city1");
+			const schedule = accommodationSelect.val();
+			var accommodationSelect = $("#papers");
+			const papers = accommodationSelect.val();
+			if (examEvent == "" || examEvent == undefined) {
+				$("#Message").text("please select the exam event");
+				return false;
+			} else if (schedule == "" || schedule == undefined) {
+				$("#Message").text( "please select the schedule");
+				return false;
+			} else if (papers == ""
+					|| papers == undefined) {
+				$("#Message").text("please select papers") ;
+				return false;
+			} 
+			return true;
+		}
         </script>
 </body>
 

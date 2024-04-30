@@ -134,6 +134,7 @@
 					</thead>
 				</table>
 			</div>
+			<p class="text-success fw-bold" id="Message"></p>
 			<div class="row text-center">
 				<div class="col">
 					<a href="http://localhost:8081/MKCL_Assignment_1/"  class="btn btn-secondary rounded-pill px-4">Back</a>
@@ -312,6 +313,7 @@
                         data : data,
                         success: function (result) {
                            console.log(result);
+                           $("#Message").text("Papers Added successfully");
                         },
                         error: function ajaxError(jqXHR) {
                             console.error('Error: ', jqXHR.responseText);

@@ -1,172 +1,217 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
-    <html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<html lang="en">
 
-    </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
 
-    <body>
-        <div class="container mt-3">
-            <div class="row p-4 border shadow-sm">
+</head>
 
-                <h1 class="display-6">Exam Event Details</h1>
-                <div class="alert alert-success my-2" role="alert">
-                    <div class="row my-2">
-                        <div class="col-md-3 col-12 ">
-                            Licence End Date
-                        </div>
-                        <div class="col-md-9 col-12 ">
-                            20/06/2024 00:00
-                        </div>
-                    </div>
-                </div>
+<body>
+	<div class="container mt-3">
+		<div class="row p-4 border shadow-sm">
 
-                <form action="examevent/save">
-                    <div class="row my-2 text-start">
-                        <div class="col-md-4 col-12">Exam Event Name*</div>
-                        <div class="col-md-8 col-12">
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                    </div>
-
-                    <div class="row my-2 text-start">
-                        <div class="col-md-4 col-12 text-success">Exam Event Code*</div>
-                        <div class="col-md-8 col-12">
-                            <input type="text" class="form-control" name="examEventCode">
-                        </div>
-                    </div>
-
-                    <div class="row my-2 text-start">
-                        <div class="col-md-4 col-12 text-success">Default Language*</div>
-                        <div class="col-md-8 col-12">
-                            <select class="form-select" name="defaultLanguageID" id="city">
-                                <optgroup id="addoptions">
-
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row my-2 text-start">
-                        <div class="col-md-4 col-12 ">Start Date*</div>
-                        <div class="col-md-8 col-12">
-                            <input type="datetime-local" class="form-control w-50" name="startDate">
-                        </div>
-                    </div>
-                    <div class="row my-2 text-start">
-                        <div class="col-md-4 col-12 ">End Date*</div>
-                        <div class="col-md-8 col-12">
-                            <input type="datetime-local" class="form-control w-50" name="endDate">
-
-                        </div>
-                    </div>
-                    <div class="row text-center mt-3">
-                        <div class="col">
-                            <input type="submit" value="Save" class="btn btn-success rounded-pill px-4">
-
-                            <a  class="btn btn-success rounded-pill" onclick="procees()">Proceed</a>
-                        </div>
-                    </div>
-                </form>
-                
-                <c:choose>
-				<c:when test="${success!=null}">
-				<div class="text-success">
-					<c:out value="Event Succesfullt added Select from below dropdown"/>
+			<h1 class="display-6">Exam Event Details</h1>
+			<div class="alert alert-success my-2" role="alert">
+				<div class="row my-2">
+					<div class="col-md-3 col-12 ">Licence End Date</div>
+					<div class="col-md-9 col-12 ">20/06/2024 00:00</div>
 				</div>
-				</c:when>
-				
-			</c:choose>
-                
-                <jsp:useBean id= "eventservice" class= "com.app.services.ExamEventService" >  
- 					<c:set var="events" value="${eventservice.allEvents}"></c:set>
-				</jsp:useBean> 
-               
-               
-                <select class="form-select my-3" name="Paper" id="addoptions2">
-							<optgroup  >
-                			<c:forEach var="event" items="${events}">
-                			
-                			<option value="${event.examEventID}" id="" >${event.name} </option>
-                			
-							</c:forEach>
+			</div>
+
+			<form action="examevent/save" onSubmit="return Validate()">
+				<div class="row my-2 text-start">
+					<div class="col-md-4 col-12">Exam Event Name*</div>
+					<div class="col-md-8 col-12">
+						<input type="text" class="form-control" name="name" id="name">
+					</div>
+				</div>
+
+				<div class="row my-2 text-start">
+					<div class="col-md-4 col-12 text-success">Exam Event Code*</div>
+					<div class="col-md-8 col-12">
+						<input type="text" class="form-control" name="examEventCode"
+							id="examEventCode">
+					</div>
+				</div>
+
+				<div class="row my-2 text-start">
+					<div class="col-md-4 col-12 text-success">Default Language*</div>
+					<div class="col-md-8 col-12">
+						<select class="form-select" name="defaultLanguageID" id="city">
+							<optgroup id="addoptions">
+
 							</optgroup>
-							
 						</select>
-             </div>
-        </div>
-        <script
+					</div>
+				</div>
+
+				<div class="row my-2 text-start">
+					<div class="col-md-4 col-12 ">Start Date*</div>
+					<div class="col-md-8 col-12">
+						<input type="datetime-local" class="form-control w-50"
+							name="startDate" id="startDate">
+					</div>
+				</div>
+				<div class="row my-2 text-start">
+					<div class="col-md-4 col-12 ">End Date*</div>
+					<div class="col-md-8 col-12">
+						<input type="datetime-local" class="form-control w-50"
+							name="endDate" id="endDate">
+
+					</div>
+				</div>
+		<p class="text-danger fw-bold" id="Message"></p>
+				<div class="row text-center mt-3">
+					<div class="col">
+						<input type="submit" value="Save"
+							class="btn btn-success rounded-pill px-4"> <a
+							class="btn btn-success rounded-pill" onclick="procees()">Proceed</a>
+					</div>
+				</div>
+			</form>
+
+			<c:choose>
+				<c:when test="${success!=null}">
+					<div class="text-success">
+						<c:out value="Event Succesfully added Select from below dropdown" />
+					</div>
+				</c:when>
+
+			</c:choose>
+
+			<jsp:useBean id="eventservice"
+				class="com.app.services.ExamEventService">
+				<c:set var="events" value="${eventservice.allEvents}"></c:set>
+			</jsp:useBean>
+
+
+			<select class="form-select my-3" name="Paper" id="addoptions2">
+				<optgroup>
+					<c:forEach var="event" items="${events}">
+
+						<option value="${event.examEventID}" id="">${event.name}
+						</option>
+
+					</c:forEach>
+				</optgroup>
+
+			</select>
+		</div>
+	</div>
+	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-        <script>
-            $(document).ready(function () {
-					getList();
-            })
-            
-            function getList(){
+	<script>
+		$(document).ready(function() {
+			getList();
+		})
 
-                $.ajax({
-                    method: 'GET',
-                    url: 'http://localhost:8081/MKCL_Assignment_1/langlist',
-                    contentType: 'application/json',
-                    success: function (result) {
-                        console.log(result);
-                        let string = ``;
-                        document.getElementById("addoptions").innerHTML = string;
-                        result = result.substring(1, result.length - 1);
-                        const arr = result.split(",");
-                        console.log("Clicked");
-                        console.log(arr);
-                        for (let i = 0; i < arr.length; i++) {
-                            var element = arr[i];
+		function getList() {
 
-                            string += "<option value=" + element + ">" + element + "</option>"
+			$.ajax({
+				method : 'GET',
+				url : 'http://localhost:8081/MKCL_Assignment_1/langlist',
+				contentType : 'application/json',
+				success : function(result) {
+					console.log(result);
+					let string = ``;
+					document.getElementById("addoptions").innerHTML = string;
+					result = result.substring(1, result.length - 1);
+					const arr = result.split(",");
+					console.log("Clicked");
+					console.log(arr);
+					for (let i = 0; i < arr.length; i++) {
+						var element = arr[i];
 
-                        }
-                        console.log(string);
-                        document.getElementById("addoptions").innerHTML = string;
-                    },
-                    error: function ajaxError(jqXHR) {
-                        console.error('Error: ', jqXHR.responseText);
-                    }
-                });
-                }
-            
-            function procees(){
+						string += "<option value=" + element + ">" + element
+								+ "</option>"
 
-				var value =document.getElementById("addoptions2");
-				//console.log(value);
-				var selected=value.options[value.selectedIndex].value;
+					}
+					console.log(string);
+					document.getElementById("addoptions").innerHTML = string;
+				},
+				error : function ajaxError(jqXHR) {
+					console.error('Error: ', jqXHR.responseText);
+				}
+			});
+		}
 
-				$.ajax({
-                    method: 'GET',
-                    url: 'http://localhost:8081/MKCL_Assignment_1/examevent/getone/'+selected,
-                    contentType: 'application/json',
-                    success: function (result) {
-                        console.log(result);
-                      	getList();
-                        window.location.replace("http://localhost:8081/MKCL_Assignment_1/papers/addpaper");
-                    },
-                    error: function ajaxError(jqXHR) {
-                        console.error('Error: ', jqXHR.responseText);
-                    }
-                });
-				
-                
-                }
-        </script>
-    </body>
+		function procees() {
 
-    </html>
+			var value = document.getElementById("addoptions2");
+			//console.log(value);
+			var selected = value.options[value.selectedIndex].value;
+
+			$
+					.ajax({
+						method : 'GET',
+						url : 'http://localhost:8081/MKCL_Assignment_1/examevent/getone/'
+								+ selected,
+						contentType : 'application/json',
+						success : function(result) {
+							console.log(result);
+							getList();
+							window.location
+									.replace("http://localhost:8081/MKCL_Assignment_1/papers/addpaper");
+						},
+						error : function ajaxError(jqXHR) {
+							console.error('Error: ', jqXHR.responseText);
+						}
+					});
+
+		}
+		function Validate() {
+			var name = $("#name").val();
+			var eventCode = $("#examEventCode").val();
+			var accommodationSelect = $("#city");
+			const defaultLanguageId = accommodationSelect.val();
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			const d = new Date();
+			const start = new Date(startDate);
+			const end = new Date(endDate);
+			if (name == "" || name == undefined) {
+				$("#Message").text("please enter your name");
+				return false;
+			} else if (eventCode == "" || eventCode == undefined) {
+				$("#Message").text( "please enter Event code");
+				return false;
+			} else if (defaultLanguageId == ""
+					|| defaultLanguageId == undefined) {
+				$("#Message").text("please select default language id") ;
+				return false;
+			} else if (start < d || start=="" || start==undefined || start=="Invalid Date") {
+				$("#Message").text("please enter a valid start date") ;
+				return false;
+
+			} else if (end < start || end=="" || end==undefined || end=="Invalid Date") {
+				$("#Message").text("End date is not valid according to start date") ;
+				return false;
+			}
+
+			console.log(name);
+			console.log(eventCode);
+			console.log(defaultLanguageId);
+			console.log(start);
+			console.log(end);
+			return true;
+		}
+	</script>
+</body>
+
+</html>
