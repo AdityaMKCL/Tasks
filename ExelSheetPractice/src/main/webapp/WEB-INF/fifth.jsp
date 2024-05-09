@@ -9,7 +9,7 @@
 <title>Converter</title>
 </head>
 <body >
-	<div class="container d-flex">
+	<div class="container d-flex " style="flex-wrap: wrap;">
 	<jsp:useBean id="eventservice" class="com.app.services.ExcelService">
 		<c:set var="events" value="${eventservice.getZipList()}"></c:set>
 	</jsp:useBean>

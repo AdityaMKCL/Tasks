@@ -27,11 +27,12 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div class="navbar-nav lead">
+					<div class="navbar-nav " style="font-weight:350;font-size:18px;">
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/">ExcelToDB</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/two">TextToExcel</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/three">ExcelToPdf</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/four">ZipUpload</a> 
+						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/six">AnyFileToZip</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/five">DownloadZip</a> 
 					</div>
 				</div>

@@ -86,6 +86,10 @@ public class HomeController {
 	public String fifthPage() {
 		return "fifth";
 	}
+	@GetMapping("/six")
+	public String sixthPage() {
+		return "sixth";
+	}
 	// C:\Users\adityak\Desktop
 
 	public static final Logger logger = org.slf4j.LoggerFactory.getLogger(HomeController.class);
@@ -126,7 +130,6 @@ public class HomeController {
 		}
 	}
 	
-	@SuppressWarnings("finally")
 	@ResponseBody
 	@PostMapping("/uploadZipFile")
 	 public ModelAndView handleFileUpload(Model model, @RequestParam("file") CommonsMultipartFile file, HttpSession s)
@@ -287,13 +290,13 @@ public class HomeController {
 	
 	
 	@PostMapping("/zip")
-    public ModelAndView zipAndDownload(@RequestParam("file") MultipartFile file, HttpSession s) {
+    public ModelAndView zipAndDownload(@RequestParam("file") MultipartFile file, HttpSession s) throws IOException {
+		
 		System.out.println("inside zip upload controller");
-        if (file.isEmpty()) {
-            return new ModelAndView("error").addObject("message", "Please select a folder to zip.");
-        }
-
-        String folderPath = s.getServletContext().getRealPath("/Files/");
+		if (file.isEmpty()) {
+			return new ModelAndView("error").addObject("message", "Please select a folder to zip.");
+		}
+        String folderPath = "C:\\temp" ;
         System.out.println(folderPath);
         File folderToZip = new File(folderPath);
 
@@ -304,16 +307,29 @@ public class HomeController {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ZipOutputStream zos = new ZipOutputStream(baos);
-            zipFolder(folderToZip, folderToZip.getName(), zos);
-            zos.close();
-
+            zipFolder(folderToZip, "TEMPORARY.zip", zos);
             
-            return new ModelAndView("index");
-//                    .addObject("fileName", "files.zip")
-//                    .addObject("fileData", baos.toByteArray());
+            zos.close();
+            byte[] data2 =  baos.toByteArray();
+			String path2 =  s.getServletContext().getRealPath("/Files/")+ "Filess.zip";
+			System.out.println("----------------------->" + path2);
+			try {
+				FileOutputStream fos = new FileOutputStream(path2);
+				fos.write(data2);
+				fos.close();
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new ModelAndView("error");
+			} catch (IOException e) {
+				e.printStackTrace();
+				return new ModelAndView("error");
+			}
         } catch (IOException e) {
             return new ModelAndView("error").addObject("message", "Error zipping folder: " + e.getMessage());
         }
+        return new ModelAndView("index");
     }
 
 	
