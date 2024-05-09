@@ -19,7 +19,7 @@
                 Manage Exam Event
             </div>
             <div class="col-md-6 col-12">
-                <a class="btn btn-success rounded-pill text-center px-5 m-0" href="http://localhost:8081/MKCL_Assignment_1/">Add Exam Event</a>
+                <a class="btn btn-success rounded-pill text-center px-5 m-0" href="http://localhost:8081/MKCL_Assignment_1/scheduleassoci/home">Schedule Test</a>
             </div>
         </div>
         <div class="row">

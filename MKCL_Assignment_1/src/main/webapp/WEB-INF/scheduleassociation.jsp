@@ -88,7 +88,7 @@
             
             
              <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped ">
                             <thead>
                                 <th>Sr no</th>
                                 <th>Event</th>
