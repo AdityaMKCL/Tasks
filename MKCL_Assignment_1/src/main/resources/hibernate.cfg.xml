@@ -5,9 +5,6 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 	
-		<property name="connection.url">jdbc:mysql://10.2.10.57/PROJECT_TRAINEE_2024?useUnicode=true&amp;characterEncoding=utf-8</property>
-		<property name="connection.username">pta2024</property>
-		<property name="connection.password">pta2024</property>
 		
 		
 		<property name="show_sql">true</property>
