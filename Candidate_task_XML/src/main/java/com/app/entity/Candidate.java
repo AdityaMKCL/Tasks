@@ -1,6 +1,8 @@
 package com.app.entity;
 import java.util.Set;
 
+import javax.persistence.Transient;
+
 
 public class Candidate{
 	
@@ -18,6 +20,7 @@ public class Candidate{
 	
 	private Integer standard;
 	
+	@Transient
 	Set<ProgrammingLang> languages;
 	
 	Set<Skills> skills;

@@ -22,6 +22,6 @@
 		<mapping class="com.app.entity.Candidate" />
 		<mapping class="com.app.entity.ProgrammingLang" />
 		<mapping class="com.app.entity.Skills" />
-		<mapping class="com.app.entity.File" />
+		<mapping class="com.app.entity.File" /> 
 	</session-factory>
 </hibernate-configuration>

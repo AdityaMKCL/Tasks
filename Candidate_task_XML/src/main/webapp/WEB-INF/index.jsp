@@ -330,7 +330,12 @@
                         data : data,
                         success: function (result) {
                            console.log(result);
+                           if(result=="Candidate Succesfully added")
                            window.location.replace("http://localhost:8081/Candidate_task_XML/");
+                           else {
+                        	   window.sessionStorage.setItem("candidate",candidate);
+                        	   window.location.replace("http://localhost:8081/Candidate_task_XML/error.jsp")
+                               }
                         },
                         error: function ajaxError(jqXHR) {
                             console.error('Error: ', jqXHR.responseText);

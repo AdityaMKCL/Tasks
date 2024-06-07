@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <mapping>
+    <path>/mltiple/*</path>
+    <decorator>/decorators/header.jsp</decorator>
+    <decorator>/decorators/left.jsp</decorator>
+    <decorator>/decorators/footer.jsp</decorator>
+  </mapping> 
+  <mapping path="/*" decorator="/decorator.jsp"/>
+  <mapping path="/hello" decorator="/decorator.jsp"/>
+  <mapping path="/second" decorator="/decorator2.jsp"/>
+   <mapping path="/error" exclue="true"/>
+   
+</sitemesh>

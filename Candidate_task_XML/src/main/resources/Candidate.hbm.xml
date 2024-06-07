@@ -8,7 +8,7 @@
 		<property name="candidate_name" column="candidate_name" />
 		<property name="user_name" column="user_name" />
 		<property name="password" column="password" />
-		<property name="description" column="description" />
+		<property name="desbcription" column="description" />
 		<property name="gender" column="gender">
 			<type name="org.hibernate.type.EnumType">
 				<param name="enumClass">com.app.entity.Gender</param>

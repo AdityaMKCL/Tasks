@@ -34,6 +34,8 @@
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/four">ZipUpload</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/six">AnyFileToZip</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/five">DownloadZip</a> 
+						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/environment/listing">Env Variables</a> 
+						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/nine">UploadAndZip</a> 
 					</div>
 				</div>
 			</div>

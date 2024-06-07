@@ -15,6 +15,7 @@ import com.app.entity.Candidate;
 import com.app.entity.Gender;
 import com.app.entity.ProgrammingLang;
 import com.app.entity.Skills;
+import com.app.utils.Validator;
 
 @Controller
 public class HomeController {
@@ -26,7 +27,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/login")
-	public RedirectView loginCandidate(@RequestParam("candidateId") String id,
+	public String loginCandidate(@RequestParam("candidateId") String id,
 			@RequestParam("candidateName") String name,
 			@RequestParam("userName") String uname,
 			@RequestParam("password") String password,
@@ -42,6 +43,9 @@ public class HomeController {
 		System.out.println(languages);
 		
 		Candidate candi=new Candidate(name,uname,password,description,Gender.valueOf(gender),Integer.parseInt(standard));
+		String validated =Validator.validate(candi);
+		if(validated!="") {
+			
 		System.out.println(candi.toString());
 		CandidateDao cdao = new CandidateDao();
 		ProgrammingLangDao pdao= new ProgrammingLangDao();
@@ -55,6 +59,9 @@ public class HomeController {
 		for(String s:skills.split(",")) {
 			sdao.addSkill(new Skills(s,candi),cid );
 		}
-		return new RedirectView("http://localhost:8081/Candidate_task_XML/");
+		return "Candidate Succesfully added";
+		}
+		return validated;
+		
 	}
 }

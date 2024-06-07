@@ -15,33 +15,31 @@
 <title>CONVERTER</title>
 </head>
 <body>
+			
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
-	<div class="container text-center mb-5">
+	<div class="container mb-5 text-center">
 		<form method="POST" enctype="multipart/form-data"
 			action="http://localhost:8081/ExelSheetPractice/form">
+			<div class="text-center shadow-sm mt-5 rounded-pill border">
+			<div class="display-4 m-5">Convert Excel to Pdf</div>
 			<div class="row mt-5">
-				<div class="col-md-6 col-12">
+				<div class="col ">
 					<p class="lead">Enter the form data</p>
 				</div>
-				<div class="col-md-6 col-12">
+				<div class="col ">
 					<input class="form-control" type="file" name="file" />
 				</div>
-			</div>
-			<div class="row text-center m-5">
-				<p class="text-success">${message}</p>
 				<div class="col">
 					<input class="btn btn-primary" type="submit" value="Upload file" />
 				</div>
-				<div class="col">
-					<a class="btn btn-primary"
-						href="http://localhost:8081/ExelSheetPractice/">Next Page</a>
-				</div>
 			</div>
+				<div class="row text-center">
+					<p class="text-success">${message}</p>
+					<div class="col"></div>
+				</div>
 		</form>
+	</div>
+	</div>
 	</div>
 </body>
 </html>

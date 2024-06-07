@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Converter</title>
+<title>CONVERTER</title>
 </head>
 <body >
 	<div class="container d-flex " style="flex-wrap: wrap;">

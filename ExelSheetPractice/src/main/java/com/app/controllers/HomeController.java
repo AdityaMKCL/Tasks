@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -59,9 +60,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.app.models.User;
 import com.app.services.ExcelService;
 
+
 @Controller
 public class HomeController {
 
+	static List<String> li=new ArrayList<String>();
 	public static Long count = 0L;
 
 	@GetMapping("/")
@@ -78,21 +81,29 @@ public class HomeController {
 	public String thirdPage() {
 		return "third";
 	}
+
 	@GetMapping("/four")
 	public String forthPage() {
 		return "fourth";
 	}
+
 	@GetMapping("/five")
 	public String fifthPage() {
 		return "fifth";
 	}
+
 	@GetMapping("/six")
 	public String sixthPage() {
 		return "sixth";
 	}
+	@GetMapping("/nine")
+	public String eighthPage() {
+		return "ninth";
+	}
 	// C:\Users\adityak\Desktop
 
 	public static final Logger logger = org.slf4j.LoggerFactory.getLogger(HomeController.class);
+
 	@ResponseBody
 	@PostMapping("/uploadExcelFile")
 	public ModelAndView uploadFile(Model model, @RequestParam("file") CommonsMultipartFile file, HttpSession s)
@@ -129,32 +140,33 @@ public class HomeController {
 			return new ModelAndView("error");
 		}
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/uploadZipFile")
-	 public ModelAndView handleFileUpload(Model model, @RequestParam("file") CommonsMultipartFile file, HttpSession s)
-				throws IOException  {
+	public ModelAndView handleFileUpload(Model model, @RequestParam("file") CommonsMultipartFile file, HttpSession s)
+			throws IOException {
 
-	        byte[] data = file.getBytes();
-			String path = s.getServletContext().getRealPath("/Files/") + file.getOriginalFilename();
-			System.out.println("----------------------->" + path);
-			ExcelService eServ = new ExcelService();
-			try {
-				FileOutputStream fos = new FileOutputStream(path);
-				fos.write(data);
-				fos.close();
+		byte[] data = file.getBytes();
+		String path = s.getServletContext().getRealPath("/Files/") + file.getOriginalFilename();
+		System.out.println("----------------------->" + path);
+		ExcelService eServ = new ExcelService();
+		try {
+			FileOutputStream fos = new FileOutputStream(path);
+			fos.write(data);
+			fos.close();
 
-				return new ModelAndView("index");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return new ModelAndView("error");
-			} catch (IOException e) {
+			return new ModelAndView("index");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ModelAndView("error");
+		} catch (IOException e) {
 
-				e.printStackTrace();
-				return new ModelAndView("error");
-			}
-	    }
+			e.printStackTrace();
+			return new ModelAndView("error");
+		}
+	}
+
 	@ResponseBody
 	@GetMapping("/submit")
 	public String saveEmployee(@RequestParam("data") String allData, HttpServletResponse response) throws IOException {
@@ -230,7 +242,8 @@ public class HomeController {
 
 	@ResponseBody
 	@PostMapping("/form")
-	public ResponseEntity<byte[]> register(Model model, @RequestParam("file") CommonsMultipartFile file, HttpSession s) {
+	public ResponseEntity<byte[]> register(Model model, @RequestParam("file") CommonsMultipartFile file,
+			HttpSession s) {
 		System.out.println("inside Form");
 		byte[] data = file.getBytes();
 		String path = s.getServletContext().getRealPath("/Files/") + file.getOriginalFilename();
@@ -251,32 +264,33 @@ public class HomeController {
 
 	private byte[] generatePDF(ArrayList<User> users) {
 		try (PDDocument document = new PDDocument()) {
-			int count=0;
-			while(count<users.size()) {
-				
-			PDPage page = new PDPage();
-			document.addPage(page);
+			int count = 0;
+			while (count < users.size()) {
 
-			try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-				contentStream.setFont(PDType1Font.HELVETICA_BOLD, 10);
-				contentStream.beginText();
-				contentStream.newLineAtOffset(50, 750);
-				contentStream.newLine();
-				contentStream.showText("Candidate Information:");
-				contentStream.newLineAtOffset(0, -20);
-				contentStream.newLine();
-				while(count<users.size()){
+				PDPage page = new PDPage();
+				document.addPage(page);
+
+				try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+					contentStream.setFont(PDType1Font.HELVETICA_BOLD, 10);
+					contentStream.beginText();
+					contentStream.newLineAtOffset(50, 750);
 					contentStream.newLine();
-				contentStream.showText("Name: " + users.get(count).getName());
-				contentStream.newLineAtOffset(0, -20);
-				contentStream.showText("City: " + users.get(count).getCity());
-				contentStream.newLineAtOffset(0, -20);
-				count++;
-				if(count%3==0 && count!=0)break;
-				}
+					contentStream.showText("Candidate Information:");
+					contentStream.newLineAtOffset(0, -20);
+					contentStream.newLine();
+					while (count < users.size()) {
+						contentStream.newLine();
+						contentStream.showText("Name: " + users.get(count).getName());
+						contentStream.newLineAtOffset(0, -20);
+						contentStream.showText("City: " + users.get(count).getCity());
+						contentStream.newLineAtOffset(0, -20);
+						count++;
+						if (count % 3 == 0 && count != 0)
+							break;
+					}
 
-				contentStream.endText();
-			}
+					contentStream.endText();
+				}
 			}
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 			document.save(byteArrayOutputStream);
@@ -287,31 +301,30 @@ public class HomeController {
 			return null;
 		}
 	}
-	
-	
+
 	@PostMapping("/zip")
-    public ModelAndView zipAndDownload(@RequestParam("file") MultipartFile file, HttpSession s) throws IOException {
-		
+	public ModelAndView zipAndDownload(@RequestParam("file") MultipartFile file, HttpSession s) throws IOException {
+
 		System.out.println("inside zip upload controller");
 		if (file.isEmpty()) {
 			return new ModelAndView("error").addObject("message", "Please select a folder to zip.");
 		}
-        String folderPath = "C:\\temp" ;
-        System.out.println(folderPath);
-        File folderToZip = new File(folderPath);
+		String folderPath = "C:\\temp";
+		System.out.println(folderPath);
+		File folderToZip = new File(folderPath);
 
-        if (!folderToZip.exists() || !folderToZip.isDirectory()) {
-            return new ModelAndView("error").addObject("message", "Invalid folder path.");
-        }
+		if (!folderToZip.exists() || !folderToZip.isDirectory()) {
+			return new ModelAndView("error").addObject("message", "Invalid folder path.");
+		}
 
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ZipOutputStream zos = new ZipOutputStream(baos);
-            zipFolder(folderToZip, "TEMPORARY.zip", zos);
-            
-            zos.close();
-            byte[] data2 =  baos.toByteArray();
-			String path2 =  s.getServletContext().getRealPath("/Files/")+ "Filess.zip";
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ZipOutputStream zos = new ZipOutputStream(baos);
+			zipFolder(folderToZip, "TEMPORARY.zip", zos);
+
+			zos.close();
+			byte[] data2 = baos.toByteArray();
+			String path2 = s.getServletContext().getRealPath("/Files/") + "Filess.zip";
 			System.out.println("----------------------->" + path2);
 			try {
 				FileOutputStream fos = new FileOutputStream(path2);
@@ -326,43 +339,152 @@ public class HomeController {
 				e.printStackTrace();
 				return new ModelAndView("error");
 			}
-        } catch (IOException e) {
-            return new ModelAndView("error").addObject("message", "Error zipping folder: " + e.getMessage());
-        }
-        return new ModelAndView("index");
-    }
+		} catch (IOException e) {
+			return new ModelAndView("error").addObject("message", "Error zipping folder: " + e.getMessage());
+		}
+		return new ModelAndView("index");
+	}
 
+	private void zipFolder(File folderToZip, String folderName, ZipOutputStream zos) throws IOException {
+		for (File file : folderToZip.listFiles()) {
+			if (file.isDirectory()) {
+				zipFolder(file, folderName + File.separator + file.getName(), zos);
+			} else {
+				FileInputStream fis = new FileInputStream(file);
+				ZipEntry zipEntry = new ZipEntry(folderName + File.separator + file.getName());
+				zos.putNextEntry(zipEntry);
+				byte[] bytes = new byte[1024];
+				int length;
+				while ((length = fis.read(bytes)) >= 0) {
+					zos.write(bytes, 0, length);
+				}
+				fis.close();
+			}
+		}
+	}
+
+	@GetMapping("/download/{file}")
+	public void downloadFile(@PathVariable String file, HttpServletResponse response) throws IOException {
+		System.out.println(file);
+		Path path = Paths.get(
+				"C:\\Users\\adityak\\Desktop\\sts\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\ExelSheetPractice\\Files\\"
+						+ file);
+		byte[] data = Files.readAllBytes(path);
+
+		response.setContentType("application/zip");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + file + "\"");
+		response.getOutputStream().write(data);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+	}
+
+	@GetMapping("/collect")
+	public void collectFIle(@RequestParam("file") MultipartFile file, HttpSession ses) {
+		System.out.println(file.getName());
+		ArrayList<String> arr= new ArrayList<String>();
+		arr=(ArrayList<String>) ses.getAttribute("Listing");
+		arr.add(file.getName());
+		ses.setAttribute("Listing", arr);
+	}
 	
+	@PostMapping("/upload")
+	public String uploadFiles(Model model, @RequestParam("file") CommonsMultipartFile file, HttpSession s) {
+		System.out.println("hello controller");
+		String path = s.getServletContext().getRealPath("/FilesToZip/") + file.getOriginalFilename();
+		byte[] data = file.getBytes();
+		String answer;
+		try {
+			FileOutputStream fos = new FileOutputStream(path);
+			fos.write(data);
+			fos.close();
+
+			 answer="ninth";
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			 answer="error";
+		} catch (IOException e) {
+
+			e.printStackTrace();
+			 answer="error";
+		}
+		
+		li.add(file.getOriginalFilename());
+		model.addAttribute("Lst", li);
+		return answer;
+	}
 	
-	   private void zipFolder(File folderToZip, String folderName, ZipOutputStream zos) throws IOException {
-	        for (File file : folderToZip.listFiles()) {
-	            if (file.isDirectory()) {
-	                zipFolder(file, folderName + File.separator + file.getName(), zos);
-	            } else {
-	                FileInputStream fis = new FileInputStream(file);
-	                ZipEntry zipEntry = new ZipEntry(folderName + File.separator + file.getName());
-	                zos.putNextEntry(zipEntry);
-	                byte[] bytes = new byte[1024];
-	                int length;
-	                while ((length = fis.read(bytes)) >= 0) {
-	                    zos.write(bytes, 0, length);
-	                }
-	                fis.close();
-	            }
-	        }
-	   }
-	   	
-	   @GetMapping("/download/{file}")
-	   public void downloadFile(@PathVariable String file,HttpServletResponse response) throws IOException {
-		   System.out.println(file);
-		   Path path = Paths.get("C:\\Users\\adityak\\Desktop\\sts\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\ExelSheetPractice\\Files\\"+file);
-		   byte[] data = Files.readAllBytes(path);
-		   
-	        response.setContentType("application/zip");
-	        response.setHeader("Content-Disposition", "attachment; filename=\"" + file + "\"");
-	        response.getOutputStream().write(data);
-	        response.getOutputStream().flush();
-	        response.getOutputStream().close();
-	   }
-	   
+
+	@GetMapping("/getZip")
+	public String CreateZip(HttpServletResponse resp,HttpSession s) {
+		System.out.println("inside Create zip");
+		
+		String directory = s.getServletContext().getRealPath("/FilesToZip/");
+		File[] files = new File(directory).listFiles();
+		
+		if(files!=null && files.length>0) {
+			//Create a temporary zip file
+			
+			try {
+				String zipFileName = directory+"all_files.zip";
+				FileOutputStream fos = new FileOutputStream(zipFileName);
+				ZipOutputStream zipOut = new ZipOutputStream(fos);
+				
+				//Add each uploaded file to the zip
+				for(File file: files) {
+					FileInputStream fis = new FileInputStream(file);
+					ZipEntry zipEntry = new ZipEntry(file.getName());
+					zipOut.putNextEntry(zipEntry);
+					byte[] bytes = new byte[1024];
+					int length;
+					while((length=fis.read(bytes))>=0) {
+						zipOut.write(bytes, 0, length);
+					}
+					fis.close();
+				}
+				//close streams
+				zipOut.close();
+				fos.close();
+				
+				//Set response content type and headers for zip file
+				resp.setContentType("application/zip");
+				resp.setHeader("Content-Disposition", "attachment; filename=\"all_files.zip\"");
+				
+				resp.setContentLength((int)new File(zipFileName).length());
+				
+				
+				//Stream zip file to response 
+				FileInputStream zipInStream = new FileInputStream(zipFileName);
+				OutputStream out = resp.getOutputStream();
+				byte[] buffer = new byte[4096];
+				int bytesRead = -1;
+				while((bytesRead = zipInStream.read(buffer)) != -1) {
+					out.write(buffer,0,bytesRead);
+				}
+				
+				//close Streams
+				zipInStream.close();
+				out.close();
+				//Delete the temporary zip file
+				new File(zipFileName).delete();
+				
+				//Delete all files from the directory
+				for(File file: files) {
+					file.delete();
+				}
+				li.removeAll(li);
+				//Removed all file names from datastore
+				//DataStore.fileNames.removeAll(DataStore.fileNames);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return "ninth";
+	}
+	
 }

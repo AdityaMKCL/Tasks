@@ -39,7 +39,6 @@ public class CandidateDao {
 		Session session = getSession().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		try {
-			String lastNameToSearchFor = "Johnson";
 			String hql = "FROM " + Candidate.class.getName() + " can WHERE can.user_name = :uname";
 			Query query = session.createQuery(hql);
 			query.setParameter("uname",  can.getUser_name()); 
