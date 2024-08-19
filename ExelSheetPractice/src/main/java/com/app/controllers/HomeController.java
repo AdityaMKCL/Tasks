@@ -1,5 +1,8 @@
 package com.app.controllers;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,20 +50,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.models.User;
 import com.app.services.ExcelService;
 
+import org.bytedeco.opencv.opencv_core.*;
+import org.bytedeco.opencv.global.opencv_core;
+import org.bytedeco.opencv.global.opencv_imgcodecs;
+import org.bytedeco.opencv.global.opencv_imgproc;
 
 @Controller
 public class HomeController {
@@ -99,6 +104,14 @@ public class HomeController {
 	@GetMapping("/nine")
 	public String eighthPage() {
 		return "ninth";
+	}
+	@GetMapping("/ten")
+	public String ninthPage() {
+		return "tenth";
+	}
+	@GetMapping("/eleven")
+	public String tenthPage() {
+		return "eleventh";
 	}
 	// C:\Users\adityak\Desktop
 
@@ -487,4 +500,122 @@ public class HomeController {
 		return "ninth";
 	}
 	
+	
+	@PostMapping("/Compare")
+	public String uploadFiles(Model model, @RequestParam("file1") CommonsMultipartFile file1,@RequestParam("file2") CommonsMultipartFile file2, HttpSession s) {
+		
+		 try {
+	            double compatibility = compareImages(file1, file2);
+	            model.addAttribute("similarity",compatibility );
+	        } catch (IOException e) {
+	        	model.addAttribute("similarity","Something went wrong" );
+	        }
+		
+		
+		return "tenth";
+	}
+	
+	 
+	 
+	 @PostMapping("/Compare2")
+	    public String compareImages(@RequestParam("file1") MultipartFile image1,
+	                                @RequestParam("file2") MultipartFile image2,
+	                                Model model) throws IOException {
+
+		    // Convert MultipartFiles to BufferedImages
+	        BufferedImage img1 = ImageIO.read(image1.getInputStream());
+	        BufferedImage img2 = ImageIO.read(image2.getInputStream());
+
+	        // Ensure both images are of the same size
+	        if (img1.getWidth() == img2.getWidth() && img1.getHeight() == img2.getHeight()) {
+	            // Convert BufferedImages to Mat for OpenCV processing
+	            Mat mat1 = bufferedImageToMat(img1);
+	            Mat mat2 = bufferedImageToMat(img2);
+
+	            // Compare the two images
+	            Mat diff = new Mat();
+	            opencv_core.absdiff(mat1, mat2, diff);
+
+	            // Convert the difference to grayscale
+	            Mat gray = new Mat();
+	            opencv_imgproc.cvtColor(diff, gray, opencv_imgproc.COLOR_BGR2GRAY);
+
+	            // Apply a binary threshold to highlight the differences
+	            Mat thresh = new Mat();
+	            opencv_imgproc.threshold(gray, thresh, 30, 255, opencv_imgproc.THRESH_BINARY);
+
+	            // Convert the result Mat back to BufferedImage
+	            BufferedImage resultImage = matToBufferedImage(thresh);
+
+	            // Convert BufferedImage to byte array
+	            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	            ImageIO.write(resultImage, "jpg", baos);
+	            byte[] imageBytes = baos.toByteArray();
+
+	            // Set headers for the response
+	            HttpHeaders headers = new HttpHeaders();
+	            headers.setContentType(org.springframework.http.MediaType.IMAGE_JPEG);
+	            model.addAttribute("outputImage", imageBytes);
+
+	        } else {
+	            model.addAttribute("message", "Images are not of the same size.");
+	        }
+	        return "eleventh";
+	    }
+
+	    private Mat bufferedImageToMat(BufferedImage image) {
+	        Mat mat = new Mat(image.getHeight(), image.getWidth(), opencv_core.CV_8UC3);
+	        byte[] data = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+	        mat.data().put(data);
+	        return mat;
+	    }
+
+	    private BufferedImage matToBufferedImage(Mat mat) {
+	        int type = BufferedImage.TYPE_BYTE_GRAY;
+	        if (mat.channels() > 1) {
+	            type = BufferedImage.TYPE_3BYTE_BGR;
+	        }
+	        BufferedImage image = new BufferedImage(mat.cols(), mat.rows(), type);
+	        mat.data().get(((DataBufferByte) image.getRaster().getDataBuffer()).getData());
+	        return image;
+	    }
+	 
+	 
+	 
+	 
+	 
+	 public double compareImages(MultipartFile file1, MultipartFile file2) throws IOException {
+		 BufferedImage img1 = resizeImage(ImageIO.read(file1.getInputStream()), 400, 400);
+		 BufferedImage img2 = resizeImage(ImageIO.read(file2.getInputStream()), 400, 400);
+		 
+		 int width = img1.getWidth();
+		 int height = img1.getHeight();
+		 System.out.println(width +"---"+img2.getWidth());
+		 System.out.println(height +"---"+img2.getHeight());
+		 System.out.println(height);
+		 System.out.println();
+		 int difference = 0;
+		 
+		 for (int y = 0; y < height; y++) {
+			 for (int x = 0; x < width; x++) {
+				 int pixel1 = img1.getRGB(x, y);
+				 int pixel2 = img2.getRGB(x, y);
+				 if (pixel1 != pixel2) {
+					 difference++;
+				 }
+			 }
+		 }
+		 
+		 double totalPixels = width * height;
+		 double compatibility = 100.0 - (difference * 100.0 / totalPixels);
+		 
+		 return compatibility;
+	 }
+	 private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+		 BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, originalImage.getType());
+		 Graphics2D graphics2D = resizedImage.createGraphics();
+		 graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+		 graphics2D.dispose();
+		 return resizedImage;
+	 }
 }

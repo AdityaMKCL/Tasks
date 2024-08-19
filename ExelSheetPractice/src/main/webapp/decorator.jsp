@@ -36,6 +36,8 @@
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/five">DownloadZip</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/environment/listing">Env Variables</a> 
 						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/nine">UploadAndZip</a> 
+						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/ten">Comparision</a> 
+						<a class="nav-link active" aria-current="page" href="http://localhost:8081/ExelSheetPractice/eleven">Javacv</a> 
 					</div>
 				</div>
 			</div>
